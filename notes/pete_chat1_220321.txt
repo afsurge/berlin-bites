@@ -1,0 +1,28 @@
+Pete - Final project - 22.03.21
+
+- Shared idea about Golpo website
+- Thinks it is a good one
+- Order/food cart: should be possible with what we know already
+- Payment:
+	- can have multiple options
+	- cash on delivery, online transfer, paypal
+	- paypal developer api available for dummy transactions
+	- not sure about actual payments
+	- could find tutorials online
+	- good feature to practice!
+- Language:
+	- resource used by Spiced: www.i18next.com/
+	- Ivana might know more
+	- Might be overkill to use this
+	- Could think double language components
+	- Depends on amount of text to translate...
+- React
+	- choice of framework
+	- fresh in mind
+	- most time spent
+	- OK
+- Redux
+	- depends on content of project
+	- at the moment is not necessary to include (current plan)
+	- for future versions might be interesting
+- PDF generation: link to npm package www.npmjs.com/package/pdfkit

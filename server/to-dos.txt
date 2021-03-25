@@ -1,0 +1,16 @@
+
+MUST:
+
+- start coding!
+- orders table with multiple food
+- new database and tables: users, food, orders, etc.
+- materials from friend
+- website layout finalize compared to Welcome/App in SN
+X - create AWS S3, SES - user: afsurge - access key and secret
+X - create new repo - spiced-final-project
+
+
+MIGHT:
+- PayPal DEV API Sandbox
+- Language: www.i18next.com
+- PDF generation: www.npmjs.com/package/pdfkit
