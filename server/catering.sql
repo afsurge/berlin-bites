@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS orderitems;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS resetcodes;
+DROP TABLE IF EXISTS food;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -5,11 +10,11 @@ CREATE TABLE users (
     first VARCHAR NOT NULL CHECK (first <> ''),
     last VARCHAR NOT NULL CHECK (last <> ''),
     phone VARCHAR NOT NULL CHECK (phone <> ''),
-    email VARCHAR NOT NULL CHECK (email <> ''),
-    hashpass VARCHAR,
+    email VARCHAR NOT NULL UNIQUE CHECK (email <> ''),
+    hashpass VARCHAR NOT NULL CHECK (hashpass <> ''),
+    ppicurl TEXT,
     address TEXT,
     admin BOOLEAN DEFAULT false,
-    registered BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

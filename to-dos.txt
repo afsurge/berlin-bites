@@ -1,9 +1,8 @@
-
 MUST:
 
 - start coding!
-- orders table with multiple food
-- new database and tables: users, food, orders, etc.
+X - orders table with multiple food
+X - new database and tables: users, food, orders, etc.
 - materials from friend
 - website layout finalize compared to Welcome/App in SN
 X - create AWS S3, SES - user: afsurge - access key and secret
@@ -21,7 +20,7 @@ X - how to insert hashpass (like SN) on table creation (like IB)?
     - Abrar: add/register user and change admin to true manually later
 - confirm table fields with Muqit bhai
 - email unique? only registered users should have unique emails, guest users can reuse...
-    - registered boolean in table so that if registered true, email has to be unique
+    - only allow registered users to order!
 
 
 
