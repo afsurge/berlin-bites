@@ -37,8 +37,8 @@ export default class Login extends React.Component {
             <div id="loginForm">
                 <h1>Login</h1>
                 <h3>
-                    Please enter your registered email and password below to
-                    login to your profile.
+                    Please enter your registered email and password below to log
+                    in to the app.
                 </h3>
                 {this.state.error && (
                     <p className="error-msg">ERROR: PLEASE TRY AGAIN !</p>

@@ -82,7 +82,7 @@ export default class ResetPassword extends React.Component {
                         <button onClick={() => this.handleReset()}>
                             RESET PASSWORD
                         </button>
-                        <Link to="/">REGISTER</Link>
+                        <Link to="/register">REGISTER</Link>
                         <Link to="/login">LOGIN</Link>
                     </>
                 )}
