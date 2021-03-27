@@ -87,14 +87,21 @@ export default class App extends Component {
                     />
                 </div>
                 <a href="/food">FOOD</a>
+                <br></br>
+                <a href="/ordes">ORDERS</a>
+                <br></br>
+                <a href="/profile">PROFILE</a>
                 <BrowserRouter>
                     <>
-                        {/* <Route path="/users" component={FindPeople} />
-                        <Route path="/friends" component={Friends} />
-                        <Route path="/chat" component={Chat} />
-                        <Route path="/online-users" component={OnlineUsers} /> */}
-                        {/* <Route path="/profile" component={Profile} /> */}
-                        <Route path="/food" component={Food} />
+                        <Route
+                            path="/food"
+                            render={() => (
+                                <Food
+                                    user_id={this.state.id}
+                                    admin={this.state.admin}
+                                />
+                            )}
+                        />
                     </>
                 </BrowserRouter>
                 {/* {this.state.showUploader && (

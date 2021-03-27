@@ -1,5 +1,5 @@
 export default function ProfilePic(props) {
-    const ppicurl = props.ppicurl || "no-profile-pic.png";
+    const ppicurl = props.ppicurl || "/no-profile-pic.png";
 
     return (
         <div id="profilepic" className={props.class1}>

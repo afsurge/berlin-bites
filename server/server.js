@@ -8,10 +8,32 @@ const { hash, compare } = require("./utils/bc");
 const csurf = require("csurf");
 const crs = require("crypto-random-string");
 const ses = require("./ses");
-// const multer = require("multer");
-// const uidSafe = require("uid-safe");
-// const s3 = require("./s3");
-// const config = require("./config.json");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const s3 = require("./s3");
+const config = require("./config.json");
+
+//// for S3 upload ////
+
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
+
+//// for S3 upload ////
 
 //// middlewares ////
 app.use(
@@ -25,7 +47,6 @@ app.use(function (req, res, next) {
     res.cookie("dtoken", req.csrfToken());
     next();
 });
-
 app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(express.json());
@@ -166,6 +187,41 @@ app.get("/user", (req, res) => {
         })
         .catch((err) => {
             console.log("Error getting logged in user:", err.message);
+        });
+});
+
+app.post("/uploadfood", uploader.single("file"), s3.upload, (req, res) => {
+    const { filename } = req.file;
+    const fullUrl = config.s3Url + filename;
+    // console.log("fullUrl:", fullUrl);
+    if (fullUrl) {
+        res.json({ imgurl: fullUrl });
+    } else {
+        console.log("Error with fullUrl:", fullUrl);
+    }
+});
+
+app.post("/addfood", (req, res) => {
+    // console.log("req.body for adding food:", req.body);
+    const { name, type, description, price, imgurl } = req.body;
+    db.addFood(name, type, description, price, imgurl)
+        .then(({ rows }) => {
+            console.log("Added new food with id:", rows[0].id);
+            res.json({ success: true, id: rows[0].id });
+        })
+        .catch((err) => {
+            console.log("Error adding new food:", err.message);
+        });
+});
+
+app.get("/food/:type.json", (req, res) => {
+    const type = req.params.type;
+    db.getFood(type)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("Error getting food:", err.message);
         });
 });
 

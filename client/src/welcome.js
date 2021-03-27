@@ -8,6 +8,11 @@ export default function Welcome() {
         <div id="welcome">
             <div id="welcome-container">
                 <h1>GOLPO CATERING & BAKERY</h1>
+                <a href="/welcome#/register">REGISTER</a>
+                <br></br>
+                <a href="/welcome#/login">LOGIN</a>
+                <br></br>
+                <a href="/welcome#/resetpass">RESET PASSWORD</a>
             </div>
             <HashRouter>
                 <>

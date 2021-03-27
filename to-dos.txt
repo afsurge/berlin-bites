@@ -2,7 +2,7 @@ MUST:
 
 - About, News
 - Food, Orders, Basket
-- Main App 
+X - Main App 
 X - Welcome/Register/Login/Reset
 X - start coding!
 X - orders table with multiple food
