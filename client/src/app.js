@@ -1,37 +1,40 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import ProfilePic from "./profilepic";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
+import Food from "./food";
 
 export default class App extends Component {
     constructor() {
         super();
         this.state = {
+            id: null,
             first: "",
             last: "",
-            imgUrl: "",
-            bio: null,
-            showUploader: false,
+            phone: "",
+            email: "",
+            ppicurl: "",
+            address: "",
+            admin: false,
+            created_at: "",
+
+            // showUploader: false,
         };
         // this.toggleUploader = this.toggleUploader.bind(this);
     }
 
-    // componentDidMount() {
-    //     axios
-    //         .get("/user")
-    //         .then(({ data }) => {
-    //             const loggedUser = data.rows[0];
-    //             this.setState({
-    //                 first: loggedUser.first,
-    //                 last: loggedUser.last,
-    //                 imgUrl: loggedUser.imgurl,
-    //                 bio: loggedUser.bio,
-    //             });
-    //         })
-    //         .catch((err) => {
-    //             "Error getting user info:", err.message;
-    //         });
-    // }
+    componentDidMount() {
+        axios
+            .get("/user")
+            .then(({ data }) => {
+                const loggedUser = data.rows[0];
+                this.setState(loggedUser);
+            })
+            .catch((err) => {
+                "Error getting user info:", err.message;
+            });
+    }
 
     // toggleUploader() {
     //     // console.log("toggleModal function is running!!!");
@@ -64,7 +67,7 @@ export default class App extends Component {
             <div id="mainAppContainer">
                 <div className="appTop">
                     <a id="logo-tag" href="/">
-                        <img id="logo" src="/net2.png" />
+                        <img id="logo" src="/net.png" />
                     </a>
                     <div id="navbar">
                         <a className="navlinks" href="/logout">
@@ -72,52 +75,29 @@ export default class App extends Component {
                         </a>
                     </div>
                 </div>
-                {/* <div id="greet-profile">
-                    <h1 id="greetuser">Hi {this.state.first}!</h1>
+                <div id="greet-profile">
+                    <h1 id="greetuser">
+                        Hi {this.state.first} {this.state.last}!
+                    </h1>
                     <ProfilePic
-                        imgUrl={this.state.imgUrl}
-                        toggleUploader={this.toggleUploader}
+                        imgUrl={this.state.ppicurl}
+                        // toggleUploader={this.toggleUploader}
                         // class1="appTop"
                         class2="smallppic"
                     />
-                </div> */}
-                {/* <BrowserRouter>
+                </div>
+                <a href="/food">FOOD</a>
+                <BrowserRouter>
                     <>
-                        <Route
-                            exact
-                            path="/"
-                            render={() => (
-                                <Profile
-                                    first={this.state.first}
-                                    last={this.state.last}
-                                    bio={this.state.bio}
-                                    imgUrl={this.state.imgUrl}
-                                    toggleUploader={this.toggleUploader}
-                                    updateBioInApp={(bio) =>
-                                        this.updateBioInApp(bio)
-                                    }
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/user/:id"
-                            render={(props) => (
-                                <>
-                                    <OtherProfile
-                                        key={props.match.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                </>
-                            )}
-                        />
-                        <Route path="/users" component={FindPeople} />
+                        {/* <Route path="/users" component={FindPeople} />
                         <Route path="/friends" component={Friends} />
                         <Route path="/chat" component={Chat} />
-                        <Route path="/online-users" component={OnlineUsers} />
+                        <Route path="/online-users" component={OnlineUsers} /> */}
+                        {/* <Route path="/profile" component={Profile} /> */}
+                        <Route path="/food" component={Food} />
                     </>
                 </BrowserRouter>
-                {this.state.showUploader && (
+                {/* {this.state.showUploader && (
                     <div id="uploaderContainer">
                         <Uploader
                             uploaderInApp={(imgUrl) =>

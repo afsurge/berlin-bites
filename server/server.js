@@ -158,6 +158,17 @@ app.post("/pass/reset/verify", (req, res) => {
         });
 });
 
+app.get("/user", (req, res) => {
+    const userId = req.session.userId;
+    db.getUserById(userId)
+        .then(({ rows }) => {
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("Error getting logged in user:", err.message);
+        });
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");

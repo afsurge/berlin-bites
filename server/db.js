@@ -7,6 +7,16 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
+module.exports.getUserById = (id) => {
+    const q = `
+        SELECT *
+        FROM users
+        WHERE id = $1
+    `;
+    const params = [id];
+    return db.query(q, params);
+};
+
 module.exports.updatePass = (hashedpass, email) => {
     const q = `
         UPDATE users

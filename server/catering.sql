@@ -28,7 +28,8 @@ CREATE TABLE resetcodes (
 CREATE TABLE food (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL CHECK (name <> ''),
-    type VARCHAR NOT NULL CHECK (name <> ''),
+    type VARCHAR NOT NULL CHECK (type <> ''),
+    description TEXT,
     imgurl TEXT,
     price INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -38,6 +39,7 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     totalprice INT NOT NULL,
+    paytype VARCHAR NOT NULL CHECK (paytype <> ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
