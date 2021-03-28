@@ -89,8 +89,8 @@ export default class App extends Component {
                 <a href="/orders">ORDERS</a>
                 <br></br>
                 <a href="/basket">
-                    BASKET ({this.state.basket_count && this.state.basket_count}
-                    )
+                    BASKET{" "}
+                    {this.state.basket_count && `(${this.state.basket_count})`}
                 </a>
                 <br></br>
                 <a href="/profile">PROFILE</a>

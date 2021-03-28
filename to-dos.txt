@@ -19,6 +19,8 @@ MIGHT:
 - PDF generation: www.npmjs.com/package/pdfkit
 
 Qs:
+- share basket strategy with teachers (localStorage)
+- REMOVE from basket issue with teachers
 X - how to insert hashpass (like SN) on table creation (like IB)?
     - David: generate manually in code with any password and insert that
     - Abrar: add/register user and change admin to true manually later
