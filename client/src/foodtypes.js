@@ -1,8 +1,10 @@
 import axios from "./axios";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import FoodDetails from "./fooddetails";
 
 export default function FoodTypes(props) {
+    const [foodId, setFoodId] = useState();
     const [name, setName] = useState();
     const [type, setType] = useState();
     const [description, setDescription] = useState();
@@ -26,10 +28,14 @@ export default function FoodTypes(props) {
 
     // useEffect(
     //     function () {
-    //         console.log("food file:", foodFile);
+    //         console.log("foodId:", id);
     //     },
-    //     [foodFile]
+    //     [id]
     // );
+
+    function showFoodDetails(id) {
+        setFoodId(id);
+    }
 
     function foodUpload() {
         // console.log("Time to upload new food!");
@@ -82,10 +88,13 @@ export default function FoodTypes(props) {
                 allTypeFood.map(function (item) {
                     return (
                         <div key={item.id}>
-                            <h2>{item.name}</h2>
+                            <h2 onClick={() => showFoodDetails(item.id)}>
+                                {item.name}
+                            </h2>
                         </div>
                     );
                 })}
+            {foodId && <FoodDetails foodId={foodId} admin={props.admin} />}
             {props.admin && (
                 <div id="foodUploader">
                     <input

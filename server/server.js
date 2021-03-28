@@ -216,12 +216,24 @@ app.post("/addfood", (req, res) => {
 
 app.get("/food/:type.json", (req, res) => {
     const type = req.params.type;
-    db.getFood(type)
+    db.getFoodByType(type)
         .then(({ rows }) => {
             res.json(rows);
         })
         .catch((err) => {
-            console.log("Error getting food:", err.message);
+            console.log("Error getting food by type:", err.message);
+        });
+});
+
+app.get("/foodDetails/:id", (req, res) => {
+    const foodId = req.params.id;
+    // console.log("Food details requested for foodId:", foodId);
+    db.getFoodById(foodId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            "Error getting food by id:", err.message;
         });
 });
 

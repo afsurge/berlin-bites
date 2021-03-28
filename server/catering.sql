@@ -31,14 +31,14 @@ CREATE TABLE food (
     type VARCHAR NOT NULL CHECK (type <> ''),
     description TEXT,
     imgurl TEXT,
-    price INT NOT NULL,
+    price NUMERIC(6,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    totalprice INT NOT NULL,
+    totalprice NUMERIC(6,2) NOT NULL,
     paytype VARCHAR NOT NULL CHECK (paytype <> ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -46,7 +46,7 @@ CREATE TABLE orders (
 CREATE TABLE orderitems (
     id SERIAL PRIMARY KEY,
     food_id INT REFERENCES food(id),
-    amount INT NOT NULL,
+    amount INT NOT NULL DEFAULT 0,
     order_id INT REFERENCES orders(id)
 );
 

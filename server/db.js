@@ -7,7 +7,17 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
-module.exports.getFood = (type) => {
+module.exports.getFoodById = (id) => {
+    const q = `
+        SELECT *
+        FROM food
+        WHERE id = $1
+    `;
+    const params = [id];
+    return db.query(q, params);
+};
+
+module.exports.getFoodByType = (type) => {
     const q = `
         SELECT *
         FROM food
