@@ -19,7 +19,7 @@ export default function FoodTypes(props) {
         axios
             .get("/food/" + props.type + ".json")
             .then(({ data }) => {
-                console.log("Received food items:", data);
+                // console.log("Received food items:", data);
                 setAllTypeFood(data);
             })
             .catch((err) => {
@@ -104,6 +104,7 @@ export default function FoodTypes(props) {
                     // path={location.pathname}
                 />
             )}
+            <button onClick={() => location.replace("/food")}>BACK</button>
             {props.admin && (
                 <div id="foodUploader">
                     <input

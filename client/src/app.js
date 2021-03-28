@@ -20,10 +20,7 @@ export default class App extends Component {
             admin: false,
             created_at: "",
             basket_items: [],
-
-            // showUploader: false,
         };
-        // this.toggleUploader = this.toggleUploader.bind(this);
     }
 
     componentDidMount() {
@@ -36,12 +33,14 @@ export default class App extends Component {
             .catch((err) => {
                 "Error getting user info:", err.message;
             });
+
+        let basket = localStorage.getItem("basket");
+        console.log("Basket from LS:", JSON.parse(basket));
     }
 
     basketInApp(itemFromBasket) {
-        console.log("Items received in App from Basket:", itemFromBasket);
-        this.state.basket_items.push(itemFromBasket);
-        console.log("basket_items:", this.state.basket_items);
+        console.log("Item received in App from Basket:", itemFromBasket);
+        localStorage.setItem("basket", JSON.stringify(itemFromBasket));
     }
 
     render() {
@@ -74,7 +73,9 @@ export default class App extends Component {
                 </div>
                 <a href="/food">FOOD</a>
                 <br></br>
-                <a href="/ordes">ORDERS</a>
+                <a href="/orders">ORDERS</a>
+                <br></br>
+                <a href="/basket">BASKET</a>
                 <br></br>
                 <a href="/profile">PROFILE</a>
                 <BrowserRouter>
@@ -97,6 +98,7 @@ export default class App extends Component {
                                 <Basket
                                     user_id={this.state.id}
                                     admin={this.state.admin}
+                                    basket_items={this.state.basket_items}
                                     basketInApp={(itemInBasket) =>
                                         this.basketInApp(itemInBasket)
                                     }

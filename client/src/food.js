@@ -2,8 +2,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import FoodTypes from "./foodtypes";
 
 export default function Food(props) {
-    // props.basketInApp("Biriyani!");
-
     return (
         <div>
             {location.pathname == "/food" && (
