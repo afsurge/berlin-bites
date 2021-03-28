@@ -8,7 +8,7 @@ X - start coding!
 X - orders table with multiple food
 X - new database and tables: users, food, orders, etc.
 - materials from MuqitBhai
-- website layout finalize compared to Welcome/App in SN
+X - website layout finalize compared to Welcome/App in SN
 X - create AWS S3, SES - user: afsurge - access key and secret
 X - create new repo - spiced-final-project
 
@@ -22,7 +22,7 @@ Qs:
 X - how to insert hashpass (like SN) on table creation (like IB)?
     - David: generate manually in code with any password and insert that
     - Abrar: add/register user and change admin to true manually later
-- confirm table fields with MuqitBhai
+X - confirm table fields with MuqitBhai
 X - email unique? only registered users should have unique emails, guest users can reuse...
     - only allow registered users to order!
 

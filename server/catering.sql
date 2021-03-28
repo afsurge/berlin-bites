@@ -39,15 +39,15 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     totalprice NUMERIC(6,2) NOT NULL,
-    paytype VARCHAR NOT NULL CHECK (paytype <> ''),
+    paytype VARCHAR NOT NULL DEFAULT 'Cash on Delivery',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE orderitems (
     id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES orders(id),
     food_id INT REFERENCES food(id),
-    amount INT NOT NULL DEFAULT 0,
-    order_id INT REFERENCES orders(id)
+    amount INT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE messages (

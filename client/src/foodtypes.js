@@ -14,6 +14,7 @@ export default function FoodTypes(props) {
 
     useEffect(function () {
         // console.log(props);
+
         setType(props.type);
         axios
             .get("/food/" + props.type + ".json")
@@ -94,7 +95,15 @@ export default function FoodTypes(props) {
                         </div>
                     );
                 })}
-            {foodId && <FoodDetails foodId={foodId} admin={props.admin} />}
+            {foodId && (
+                <FoodDetails
+                    foodId={foodId}
+                    admin={props.admin}
+                    basketInApp={props.basketInApp}
+                    showFoodDetails={(id) => showFoodDetails(id)}
+                    // path={location.pathname}
+                />
+            )}
             {props.admin && (
                 <div id="foodUploader">
                     <input

@@ -2,6 +2,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import FoodTypes from "./foodtypes";
 
 export default function Food(props) {
+    // props.basketInApp("Biriyani!");
+
     return (
         <div>
             {location.pathname == "/food" && (
@@ -25,25 +27,41 @@ export default function Food(props) {
                     <Route
                         path="/food/starters"
                         render={() => (
-                            <FoodTypes admin={props.admin} type={"starter"} />
+                            <FoodTypes
+                                admin={props.admin}
+                                type={"starter"}
+                                basketInApp={props.basketInApp}
+                            />
                         )}
                     />
                     <Route
                         path="/food/main"
                         render={() => (
-                            <FoodTypes admin={props.admin} type={"main"} />
+                            <FoodTypes
+                                admin={props.admin}
+                                type={"main"}
+                                basketInApp={props.basketInApp}
+                            />
                         )}
                     />
                     <Route
                         path="/food/sides"
                         render={() => (
-                            <FoodTypes admin={props.admin} type={"side"} />
+                            <FoodTypes
+                                admin={props.admin}
+                                type={"side"}
+                                basketInApp={props.basketInApp}
+                            />
                         )}
                     />
                     <Route
                         path="/food/dessert"
                         render={() => (
-                            <FoodTypes admin={props.admin} type={"dessert"} />
+                            <FoodTypes
+                                admin={props.admin}
+                                type={"dessert"}
+                                basketInApp={props.basketInApp}
+                            />
                         )}
                     />
                 </>

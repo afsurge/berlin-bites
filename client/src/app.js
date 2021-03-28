@@ -4,6 +4,7 @@ import axios from "./axios";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import Food from "./food";
+import Basket from "./basket";
 
 export default class App extends Component {
     constructor() {
@@ -18,6 +19,7 @@ export default class App extends Component {
             address: "",
             admin: false,
             created_at: "",
+            basket_items: [],
 
             // showUploader: false,
         };
@@ -36,27 +38,11 @@ export default class App extends Component {
             });
     }
 
-    // toggleUploader() {
-    //     // console.log("toggleModal function is running!!!");
-    //     this.setState({
-    //         showUploader: !this.state.showUploader,
-    //     });
-    // }
-
-    // uploaderInApp(imgUrlFromUploader) {
-    //     console.log(
-    //         "Received imgUrl in App from Uploader:",
-    //         imgUrlFromUploader
-    //     );
-    //     this.setState({
-    //         imgUrl: imgUrlFromUploader,
-    //         showUploader: !this.state.showUploader,
-    //     });
-    // }
-
-    // updateBioInApp(bioFromBioEditor) {
-    //     console.log("Received bio in App from BioEditor:", bioFromBioEditor);
-    // }
+    basketInApp(itemFromBasket) {
+        console.log("Items received in App from Basket:", itemFromBasket);
+        this.state.basket_items.push(itemFromBasket);
+        console.log("basket_items:", this.state.basket_items);
+    }
 
     render() {
         if (!this.state.first) {
@@ -99,6 +85,21 @@ export default class App extends Component {
                                 <Food
                                     user_id={this.state.id}
                                     admin={this.state.admin}
+                                    basketInApp={(itemInBasket) =>
+                                        this.basketInApp(itemInBasket)
+                                    }
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/basket"
+                            render={() => (
+                                <Basket
+                                    user_id={this.state.id}
+                                    admin={this.state.admin}
+                                    basketInApp={(itemInBasket) =>
+                                        this.basketInApp(itemInBasket)
+                                    }
                                 />
                             )}
                         />
