@@ -15,13 +15,6 @@ export default function FoodDetails(props) {
         });
     }, []);
 
-    // useEffect(
-    //     function () {
-    //         console.log("Amount now:", amount);
-    //     },
-    //     [amount]
-    // );
-
     function addToBasket(foodId, foodPrice, amount) {
         // console.log(foodId, foodPrice, amount);
         props.basketInApp({ id: foodId, price: foodPrice, amount: amount });

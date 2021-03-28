@@ -19,7 +19,6 @@ export default class App extends Component {
             address: "",
             admin: false,
             created_at: "",
-            basket_items: [],
         };
     }
 
@@ -34,13 +33,29 @@ export default class App extends Component {
                 "Error getting user info:", err.message;
             });
 
-        let basket = localStorage.getItem("basket");
-        console.log("Basket from LS:", JSON.parse(basket));
+        let newBasketFromLS = localStorage.getItem("basket"); // JSON
+        let count;
+        if (newBasketFromLS) {
+            count = JSON.parse(newBasketFromLS).length;
+            this.setState({ basket_count: count });
+        }
+        console.log("New basket from LS:", JSON.parse(newBasketFromLS));
+        // console.log("count:", count);
+        this.setState({ basket_items: newBasketFromLS });
     }
 
-    basketInApp(itemFromBasket) {
-        console.log("Item received in App from Basket:", itemFromBasket);
-        localStorage.setItem("basket", JSON.stringify(itemFromBasket));
+    basketInApp(itemForBasket) {
+        // console.log("Item received in App from Basket:", itemForBasket);
+
+        let basketFromLS = JSON.parse(localStorage.getItem("basket"));
+        console.log("oldBasketFromLS:", basketFromLS);
+
+        if (basketFromLS) {
+            basketFromLS.push(itemForBasket);
+            localStorage.setItem("basket", JSON.stringify(basketFromLS));
+        } else {
+            localStorage.setItem("basket", JSON.stringify([itemForBasket]));
+        }
     }
 
     render() {
@@ -66,8 +81,6 @@ export default class App extends Component {
                     </h1>
                     <ProfilePic
                         imgUrl={this.state.ppicurl}
-                        // toggleUploader={this.toggleUploader}
-                        // class1="appTop"
                         class2="smallppic"
                     />
                 </div>
@@ -75,7 +88,10 @@ export default class App extends Component {
                 <br></br>
                 <a href="/orders">ORDERS</a>
                 <br></br>
-                <a href="/basket">BASKET</a>
+                <a href="/basket">
+                    BASKET ({this.state.basket_count && this.state.basket_count}
+                    )
+                </a>
                 <br></br>
                 <a href="/profile">PROFILE</a>
                 <BrowserRouter>
@@ -107,16 +123,6 @@ export default class App extends Component {
                         />
                     </>
                 </BrowserRouter>
-                {/* {this.state.showUploader && (
-                    <div id="uploaderContainer">
-                        <Uploader
-                            uploaderInApp={(imgUrl) =>
-                                this.uploaderInApp(imgUrl)
-                            }
-                            toggleUploader={this.toggleUploader}
-                        />
-                    </div>
-                )} */}
             </div>
         );
     }

@@ -237,6 +237,19 @@ app.get("/foodDetails/:id", (req, res) => {
         });
 });
 
+app.get("/basketfood/:ids", (req, res) => {
+    const foodIds = req.params.ids.split(",");
+    console.log("Basket foodIds:", foodIds);
+    db.getFoodByIds(foodIds)
+        .then(({ rows }) => {
+            // console.log("Food info for basket:", rows);
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("Error getting food info for basket:", err.message);
+        });
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");

@@ -1,4 +1,5 @@
 const spicedPg = require("spiced-pg");
+const { ids } = require("webpack");
 
 const db = spicedPg(
     process.env.DATABASE_URL ||
@@ -6,6 +7,16 @@ const db = spicedPg(
 );
 
 // NEWEST AT TOP
+
+module.exports.getFoodByIds = (ids) => {
+    const q = `
+        SELECT *
+        FROM food
+        WHERE id = ANY($1)
+    `;
+    const params = [ids];
+    return db.query(q, params);
+};
 
 module.exports.getFoodById = (id) => {
     const q = `
