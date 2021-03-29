@@ -84,6 +84,8 @@ export default function Basket(props) {
             .then(() => {
                 console.log("Added orders and order items successfully!");
                 // more things to do here...
+                localStorage.removeItem("basket");
+                location.replace("/orders");
             })
             .catch((err) => {
                 console.log("Error adding order:", err.message);

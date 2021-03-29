@@ -7,7 +7,7 @@ export default function ProfilePic(props) {
                 className={props.class2}
                 src={ppicurl}
                 alt={props.last}
-                // onClick={props.toggleUploader}
+                onClick={props.toggleUploader}
             />
         </div>
     );

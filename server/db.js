@@ -8,6 +8,58 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
+module.exports.updateppic = (ppicurl, userId) => {
+    const q = `
+        UPDATE users
+        SET ppicurl = $1
+        WHERE id = $2
+    `;
+    const params = [ppicurl, userId];
+    return db.query(q, params);
+};
+
+module.exports.getppicUrl = (userId) => {
+    const q = `
+        SELECT ppicurl 
+        FROM users
+        WHERE id = $1
+    `;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.getItemsByOrderId = (id) => {
+    const q = `
+        SELECT *
+        FROM orderitems
+        WHERE order_id = $1
+    `;
+    const params = [id];
+    return db.query(q, params);
+};
+
+module.exports.getOrdersByUserId = (id) => {
+    const q = `
+        SELECT *
+        FROM orders
+        WHERE user_id = $1
+    `;
+    const params = [id];
+    return db.query(q, params);
+};
+
+// module.exports.getOrdersByUserId = (id) => {
+//     const q = `
+//         SELECT orders.id, orders.bill, orders.paytype, orders.created_at, orderitems.id AS orderitems_id, orderitems.food_id, orderitems.amount
+//         FROM orders
+//         JOIN orderitems
+//         ON orders.id = orderitems.order_id
+//         WHERE orders.user_id = $1
+//     `;
+//     const params = [id];
+//     return db.query(q, params);
+// };
+
 module.exports.addOrderItems = (order_id, food_id, amount) => {
     const q = `
         INSERT INTO orderitems (order_id, food_id, amount) 

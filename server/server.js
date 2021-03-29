@@ -268,9 +268,67 @@ app.post("/order", (req, res) => {
                         );
                     });
             }
+            res.json({ success: true });
         })
         .catch((err) => {
             console.log("Error adding order:", err.message);
+        });
+});
+
+app.get("/orders/:id", (req, res) => {
+    const userId = req.params.id;
+    // console.log("Request orders for userId:", userId);
+    if (userId != 1) {
+        // db.getOrdersByUserId(userId)
+        //     .then(({ rows }) => {
+        //         console.log("All orders by this user:", rows);
+        //         res.json(rows);
+        //     })
+        //     .catch((err) => {
+        //         console.log(
+        //             "Error getting orders of specific user:",
+        //             err.message
+        //         );
+        //     });
+
+        db.getOrdersByUserId(userId)
+            .then(({ rows }) => {
+                res.json(rows);
+            })
+            .catch((err) => {
+                console.log("Error getting orders for this user:", err.message);
+            });
+    }
+});
+
+app.post("/uploadppic", uploader.single("file"), s3.upload, (req, res) => {
+    const userId = req.session.userId;
+    const { filename } = req.file;
+    const fullUrl = config.s3Url + filename;
+    console.log("fullUrl:", fullUrl);
+
+    db.getppicUrl(userId)
+        .then(({ rows }) => {
+            const ppicToDelete = rows[0].ppicurl;
+            console.log("ppicurl to delete and update:", ppicToDelete);
+            const fileToDelete = ppicToDelete.slice(38);
+            // console.log(
+            //     "filename of ppic to delete after upload:",
+            //     fileToDelete
+            // );
+            s3.delete(fileToDelete);
+        })
+        .catch((err) => {
+            console.log("Error getting previous profile pic:", err.message);
+        });
+
+    db.updateppic(fullUrl, userId)
+        .then(() => {
+            console.log("profile pic link added to database!");
+            res.json({ ppicurl: fullUrl });
+        })
+        .catch((err) => {
+            console.log("Error updating profile pic:", err.message);
         });
 });
 

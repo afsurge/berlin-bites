@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import Food from "./food";
 import Basket from "./basket";
+import Orders from "./orders";
+import Profile from "./profile";
+import Uploader from "./uploader";
 
 export default class App extends Component {
     constructor() {
@@ -19,7 +22,9 @@ export default class App extends Component {
             address: "",
             admin: false,
             created_at: "",
+            showUploader: false,
         };
+        this.toggleUploader = this.toggleUploader.bind(this);
     }
 
     componentDidMount() {
@@ -58,6 +63,23 @@ export default class App extends Component {
         }
     }
 
+    toggleUploader() {
+        this.setState({
+            showUploader: !this.state.showUploader,
+        });
+    }
+
+    uploaderInApp(ppicurlFromUploader) {
+        console.log(
+            "Received imgUrl in App from Uploader:",
+            ppicurlFromUploader
+        );
+        this.setState({
+            ppicurl: ppicurlFromUploader,
+            showUploader: !this.state.showUploader,
+        });
+    }
+
     render() {
         if (!this.state.first) {
             return "LOADING...";
@@ -70,6 +92,24 @@ export default class App extends Component {
                         <img id="logo" src="/net.png" />
                     </a>
                     <div id="navbar">
+                        <a className="navlinks" href="/food">
+                            FOOD
+                        </a>
+                        <br></br>
+                        <a className="navlinks" href="/orders">
+                            ORDERS
+                        </a>
+                        <br></br>
+                        <a className="navlinks" href="/basket">
+                            BASKET
+                            {this.state.basket_count &&
+                                `(${this.state.basket_count})`}
+                        </a>
+                        <br></br>
+                        <a className="navlinks" href="/profile">
+                            PROFILE
+                        </a>
+                        <br></br>
                         <a className="navlinks" href="/logout">
                             LOGOUT
                         </a>
@@ -80,20 +120,11 @@ export default class App extends Component {
                         Hi {this.state.first} {this.state.last}!
                     </h1>
                     <ProfilePic
-                        imgUrl={this.state.ppicurl}
+                        ppicurl={this.state.ppicurl}
+                        toggleUploader={this.toggleUploader}
                         class2="smallppic"
                     />
                 </div>
-                <a href="/food">FOOD</a>
-                <br></br>
-                <a href="/orders">ORDERS</a>
-                <br></br>
-                <a href="/basket">
-                    BASKET{" "}
-                    {this.state.basket_count && `(${this.state.basket_count})`}
-                </a>
-                <br></br>
-                <a href="/profile">PROFILE</a>
                 <BrowserRouter>
                     <>
                         <Route
@@ -121,8 +152,36 @@ export default class App extends Component {
                                 />
                             )}
                         />
+                        <Route
+                            path="/orders"
+                            render={() => (
+                                <Orders
+                                    user_id={this.state.id}
+                                    admin={this.state.admin}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/profile"
+                            render={() => (
+                                <Profile
+                                    userDetails={this.state}
+                                    toggleUploader={this.toggleUploader}
+                                />
+                            )}
+                        />
                     </>
                 </BrowserRouter>
+                {this.state.showUploader && (
+                    <div id="uploaderContainer">
+                        <Uploader
+                            uploaderInApp={(ppicurl) =>
+                                this.uploaderInApp(ppicurl)
+                            }
+                            toggleUploader={this.toggleUploader}
+                        />
+                    </div>
+                )}
             </div>
         );
     }

@@ -39,20 +39,20 @@ module.exports.upload = (req, res, next) => {
         });
 };
 
-// module.exports.delete = (delFile) => {
-//     console.log("File to delete in S3 after new upload:", delFile);
+module.exports.delete = (delFile) => {
+    console.log("File to delete in S3 after new upload:", delFile);
 
-//     s3.deleteObject(
-//         {
-//             Bucket: "spicedling",
-//             Key: delFile,
-//         },
-//         (err, data) => {
-//             if (err) {
-//                 console.log("Error in S3 delete:", err.message);
-//             } else {
-//                 console.log("Success with S3 delete!", data);
-//             }
-//         }
-//     );
-// };
+    s3.deleteObject(
+        {
+            Bucket: "golpo-bucket",
+            Key: delFile,
+        },
+        (err, data) => {
+            if (err) {
+                console.log("Error in S3 delete:", err.message);
+            } else {
+                console.log("Success with S3 delete!", data);
+            }
+        }
+    );
+};
