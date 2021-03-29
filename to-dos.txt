@@ -19,6 +19,7 @@ MIGHT:
 - PDF generation: www.npmjs.com/package/pdfkit
 
 Qs:
+- add try-catch for localStorage
 - share basket strategy with teachers (localStorage)
 - REMOVE from basket issue with teachers
 X - how to insert hashpass (like SN) on table creation (like IB)?

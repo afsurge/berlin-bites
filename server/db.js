@@ -8,6 +8,25 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
+module.exports.addOrderItems = (order_id, food_id, amount) => {
+    const q = `
+        INSERT INTO orderitems (order_id, food_id, amount) 
+        VALUES ($1, $2, $3)
+    `;
+    const params = [order_id, food_id, amount];
+    return db.query(q, params);
+};
+
+module.exports.addOrder = (user_id, bill) => {
+    const q = `
+        INSERT INTO orders (user_id, bill) 
+        VALUES ($1, $2)
+        RETURNING id
+    `;
+    const params = [user_id, bill];
+    return db.query(q, params);
+};
+
 module.exports.getFoodByIds = (ids) => {
     const q = `
         SELECT *

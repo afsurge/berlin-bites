@@ -16,6 +16,7 @@ export default class Login extends React.Component {
             .then(({ data }) => {
                 if (data.success) {
                     location.replace("/");
+                    localStorage.removeItem("basket");
                 } else {
                     this.setState({ error: true });
                 }

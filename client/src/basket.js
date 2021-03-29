@@ -10,6 +10,7 @@ export default function Basket(props) {
     const [basket, setBasket] = useState();
     const [foodInfo, setFoodInfo] = useState();
     const [bill, setBill] = useState();
+    const [confirm, setConfirm] = useState(false);
 
     useEffect(function () {
         const basketFromApp = JSON.parse(props.basket_items);
@@ -28,8 +29,6 @@ export default function Basket(props) {
                 foodIdArray.push(basketFromApp[i].id);
                 total += basketFromApp[i].price * basketFromApp[i].amount;
             }
-
-            // console.log("total:", total);
             setBill(total);
             // console.log("ids of food items in basket:", foodIdArray);
             axios
@@ -44,18 +43,51 @@ export default function Basket(props) {
         }
     }, []);
 
+    useEffect(
+        function () {
+            var newTotal = 0;
+            if (basket) {
+                for (var i = 0; i < basket.length; i++) {
+                    newTotal += basket[i].price * basket[i].amount;
+                }
+                setBill(newTotal);
+            }
+        },
+        [basket]
+    );
+
     function removeFood(i) {
         console.log("Remove this food and amount at index:", i);
-        var newBasket = basket;
-        var newFoodInfo = foodInfo;
+        var newBasket = [...basket];
+        var newFoodInfo = [...foodInfo];
         newBasket.splice(i, 1);
         newFoodInfo.splice(i, 1);
-        console.log(newBasket);
-        console.log(newFoodInfo);
         setBasket(newBasket);
         setFoodInfo(newFoodInfo);
-        // setBasket(basket.splice(i, 1));
-        // setFoodInfo(foodInfo.splice(i, 1));
+
+        if (newBasket.length != 0) {
+            localStorage.setItem("basket", JSON.stringify(newBasket));
+        } else {
+            localStorage.removeItem("basket");
+            location.replace("/food");
+        }
+    }
+
+    function checkout() {
+        console.log("Food ordered!");
+        axios
+            .post("/order", {
+                user_id: props.user_id,
+                bill: bill,
+                basket: basket,
+            })
+            .then(() => {
+                console.log("Added orders and order items successfully!");
+                // more things to do here...
+            })
+            .catch((err) => {
+                console.log("Error adding order:", err.message);
+            });
     }
 
     return (
@@ -71,13 +103,31 @@ export default function Basket(props) {
                                 {basket[i].amount}x ---- €{" "}
                                 {food.price * basket[i].amount}
                             </p>
-                            <button onClick={() => removeFood(i)}>
-                                REMOVE
-                            </button>
+                            {!confirm && (
+                                <button onClick={() => removeFood(i)}>
+                                    REMOVE
+                                </button>
+                            )}
                         </div>
                     );
                 })}
-            {bill && <h1>Total Bill: € {bill}</h1>}
+            {bill && <h2>Total Bill: € {bill}</h2>}
+            {bill && (
+                <button onClick={() => setConfirm(!confirm)}>
+                    {confirm && "MODIFY BASKET"}
+                    {!confirm && "CONFIRM BASKET"}
+                </button>
+            )}
+
+            {confirm && (
+                <button
+                    onClick={() => {
+                        checkout();
+                    }}
+                >
+                    ORDER & CHECKOUT
+                </button>
+            )}
         </div>
     );
 }

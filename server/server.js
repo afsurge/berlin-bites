@@ -250,6 +250,30 @@ app.get("/basketfood/:ids", (req, res) => {
         });
 });
 
+app.post("/order", (req, res) => {
+    console.log("Order received:", req.body);
+    const { user_id, bill, basket } = req.body;
+    db.addOrder(user_id, bill)
+        .then(({ rows }) => {
+            const orderId = rows[0].id;
+            console.log("Order added with id:", orderId);
+            for (let i = 0; i < basket.length; i++) {
+                db.addOrderItems(orderId, basket[i].id, basket[i].amount)
+                    .then(() => {
+                        console.log("Added order items for i:", i);
+                    })
+                    .catch((err) => {
+                        console.log(
+                            `Error adding order items for i=${i}: ${err.message}`
+                        );
+                    });
+            }
+        })
+        .catch((err) => {
+            console.log("Error adding order:", err.message);
+        });
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
