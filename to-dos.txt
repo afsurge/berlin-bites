@@ -19,11 +19,13 @@ MIGHT:
 - PDF generation: www.npmjs.com/package/pdfkit
 
 Qs:
-- privateMsg between admin and any user (sockets)
-- findPeople like SN for admin only
+- populate food, users, orders, etc.
 - otherProfile for only admin
 - profileEditor like bioEditor in SN with all changes possible
+- finish orders sorting issue for users
 - all orders for admin with more like incremental search/IB
+- privateMsg between admin and any user (sockets)
+- findPeople like SN for admin only
 - add try-catch for localStorage
 X - share basket strategy with teachers (localStorage)
 X - REMOVE from basket issue with teachers
