@@ -80,6 +80,13 @@ export default class App extends Component {
         });
     }
 
+    updateProfileInApp(profileFromBioEditor) {
+        console.log(
+            "Received profile in App from ProfileEditor:",
+            profileFromBioEditor
+        );
+    }
+
     render() {
         if (!this.state.first) {
             return "LOADING...";
@@ -167,6 +174,9 @@ export default class App extends Component {
                                 <Profile
                                     userDetails={this.state}
                                     toggleUploader={this.toggleUploader}
+                                    updateProfileInApp={(profile) =>
+                                        this.updateProfileInApp(profile)
+                                    }
                                 />
                             )}
                         />

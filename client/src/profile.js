@@ -1,4 +1,5 @@
 import ProfilePic from "./profilepic";
+import ProfileEditor from "./profileeditor";
 import axios from "./axios";
 import { useState } from "react";
 
@@ -24,8 +25,14 @@ export default function Profile(props) {
             <ProfilePic
                 ppicurl={props.userDetails.ppicurl}
                 toggleUploader={() => props.toggleUploader()}
-                class1="withBio"
+                class1="withProfileEditor"
                 class2="largeppic"
+            />
+            <ProfileEditor
+                userDetails={props.userDetails}
+                updateProfileInApp={(profile) =>
+                    props.updateProfileInApp(profile)
+                }
             />
             <button
                 id="del-profile-button"
