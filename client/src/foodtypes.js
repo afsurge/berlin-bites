@@ -1,6 +1,6 @@
 import axios from "./axios";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+// import { BrowserRouter, Route } from "react-router-dom";
 import FoodDetails from "./fooddetails";
 
 export default function FoodTypes(props) {

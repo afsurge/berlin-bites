@@ -1,7 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: rgb(216, 203, 183);
-    color: white;
+    background-color: whitesmoke;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.appTop {
+    background-image: url(/home-background.jpg);
+    background-size: cover;
+    height: 500px;
 }
 
 #welcome {

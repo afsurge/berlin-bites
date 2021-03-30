@@ -7,7 +7,7 @@ export default function Welcome() {
     return (
         <div id="welcome">
             <div id="welcome-container">
-                <h1>GOLPO CATERING & BAKERY</h1>
+                <h1>BerlinBites</h1>
                 <a href="/welcome#/register">REGISTER</a>
                 <br></br>
                 <a href="/welcome#/login">LOGIN</a>
