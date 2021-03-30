@@ -316,6 +316,16 @@ app.get("/orderitems/:id", (req, res) => {
         });
 });
 
+app.get("/allorders", (req, res) => {
+    db.getAllOrders()
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("Error getting all orders for admin:", err.message);
+        });
+});
+
 app.post("/uploadppic", uploader.single("file"), s3.upload, (req, res) => {
     const userId = req.session.userId;
     const { filename } = req.file;

@@ -9,37 +9,54 @@ export default function Orders(props) {
     // const [showBasket, setShowBasket] = useState(false);
 
     useEffect(function () {
-        axios
-            .get("/orders/" + userId)
-            .then(({ data }) => {
-                console.log("Orders received from server:", data);
-                setOrders(data.reverse());
-                // console.log(orders);
-                // for (var i = 0; i < data.length; i++) {
-                //     axios
-                //         .get("/orderitems/" + data[i].id)
-                //         .then(({ data }) => {
-                //             console.log(
-                //                 "Data received about this order:",
-                //                 data
-                //             );
-                //             setItems({ i: data });
-                //             // console.log(items);
-                //             // do something more here...
-                //         })
-                //         .catch((err) => {
-                //             console.log(
-                //                 `Error getting items for order ${orders[i].id}: ${err.message}`
-                //             );
-                //         });
-                // }
-            })
-            .catch((err) => {
-                console.log("Error getting orders from server:", err.message);
-            });
+        if (!admin) {
+            axios
+                .get("/orders/" + userId)
+                .then(({ data }) => {
+                    console.log("Orders received from server:", data);
+                    setOrders(data.reverse());
+                    // console.log(orders);
+                    // for (var i = 0; i < data.length; i++) {
+                    //     axios
+                    //         .get("/orderitems/" + data[i].id)
+                    //         .then(({ data }) => {
+                    //             console.log(
+                    //                 "Data received about this order:",
+                    //                 data
+                    //             );
+                    //             setItems({ i: data });
+                    //             // console.log(items);
+                    //             // do something more here...
+                    //         })
+                    //         .catch((err) => {
+                    //             console.log(
+                    //                 `Error getting items for order ${orders[i].id}: ${err.message}`
+                    //             );
+                    //         });
+                    // }
+                })
+                .catch((err) => {
+                    console.log(
+                        "Error getting orders from server:",
+                        err.message
+                    );
+                });
 
-        // var sortOrders = groupBy2(orders, "id");
-        // console.log(sortOrders[5]);
+            // var sortOrders = groupBy2(orders, "id");
+            // console.log(sortOrders[5]);
+        } else {
+            axios
+                .get("/allorders")
+                .then(({ data }) => {
+                    console.log("Orders received for admin:", data);
+                    setOrders(data.reverse());
+                })
+                .catch((err) => {
+                    console.log("Error getting orders for admin:", err.message);
+                });
+            // complete this part for admin viewing all orders!
+            // tips by Alistair for this!
+        }
     }, []);
 
     function getBasket(id) {
@@ -56,54 +73,63 @@ export default function Orders(props) {
             })
             .catch((err) => {
                 console.log(
-                    `Error getting items for order ${orders[i].id}: ${err.message}`
+                    `Error getting items for order this order: ${err.message}`
                 );
             });
     }
 
     return (
         <div>
-            <h2>Your recent orders</h2>
+            {admin ? <h2>All customer orders</h2> : <h2>Your recent orders</h2>}
             <>
-                {orders &&
-                    orders.map(function (order) {
-                        return (
-                            <div key={order.id}>
-                                <p>
-                                    {order.created_at.slice(0, 10)} | {order.id}{" "}
-                                    | Total bill: €{order.bill} | Payment:{" "}
-                                    {order.paytype}
-                                </p>
-                                {!items && (
-                                    <button onClick={() => getBasket(order.id)}>
-                                        BASKET
-                                    </button>
-                                )}
-                            </div>
-                        );
-                    })}
-                {items &&
-                    items.map(function (item) {
-                        return (
-                            <div key={item.id}>
-                                <p>
-                                    {item.name} | €{item.price} | {item.amount}x
-                                    | Sub-total: €{item.price * item.amount}
-                                </p>
-                            </div>
-                        );
-                    })}
+                <div>
+                    {orders &&
+                        orders.map(function (order) {
+                            return (
+                                <div key={order.id}>
+                                    <p>
+                                        DATE {order.created_at.slice(0, 10)} |
+                                        {admin &&
+                                            ` CUSTOMER ${order.first} ${order.last} |`}{" "}
+                                        BILL €{order.bill} | PAYMENT{" "}
+                                        {order.paytype}
+                                    </p>
+                                    {!items && (
+                                        <button
+                                            onClick={() => getBasket(order.id)}
+                                        >
+                                            BASKET
+                                        </button>
+                                    )}
+                                </div>
+                            );
+                        })}
+                </div>
+                <div>
+                    {items &&
+                        items.map(function (item) {
+                            return (
+                                <div key={item.id}>
+                                    <p>
+                                        {item.name} | €{item.price} |{" "}
+                                        {item.amount}x | Sub-total: €
+                                        {item.price * item.amount}
+                                    </p>
+                                </div>
+                            );
+                        })}
 
-                {items && (
-                    <button
-                        onClick={() => {
-                            setItems(null);
-                            // setShowBasket(false);
-                        }}
-                    >
-                        CLOSE
-                    </button>
-                )}
+                    {items && (
+                        <button
+                            onClick={() => {
+                                setItems(null);
+                                // setShowBasket(false);
+                            }}
+                        >
+                            CLOSE
+                        </button>
+                    )}
+                </div>
             </>
         </div>
     );

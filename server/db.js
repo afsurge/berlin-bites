@@ -8,6 +8,16 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
+module.exports.getAllOrders = () => {
+    const q = `
+        SELECT users.first, users.last, orders.id, orders.bill, orders.paytype, orders.created_at
+        FROM orders
+        JOIN users
+        ON users.id = orders.user_id
+    `;
+    return db.query(q);
+};
+
 module.exports.updateProfile = (email, address, phone, userId) => {
     const q = `
         UPDATE users
@@ -60,6 +70,7 @@ module.exports.getOrdersByUserId = (userId) => {
     return db.query(q, params);
 };
 
+// NEW ABOVE
 // module.exports.getOrdersByUserId = (id) => {
 //     const q = `
 //         SELECT orders.id, orders.bill, orders.paytype, orders.created_at, orderitems.id AS orderitems_id, orderitems.food_id, orderitems.amount

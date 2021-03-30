@@ -85,16 +85,20 @@ export default function FoodTypes(props) {
             {props.type == "main" && <h1>MAIN DISHES</h1>}
             {props.type == "side" && <h1>SIDE DISHES</h1>}
             {props.type == "dessert" && <h1>DESSERTS</h1>}
-            {allTypeFood &&
-                allTypeFood.map(function (item) {
-                    return (
-                        <div key={item.id}>
-                            <h2 onClick={() => showFoodDetails(item.id)}>
+            <div>
+                {allTypeFood &&
+                    allTypeFood.map(function (item) {
+                        return (
+                            <h2
+                                key={item.id}
+                                onClick={() => showFoodDetails(item.id)}
+                            >
                                 {item.name}
                             </h2>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+            </div>
+
             {foodId && (
                 <FoodDetails
                     foodId={foodId}

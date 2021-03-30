@@ -27,7 +27,7 @@ export default function FoodDetails(props) {
     return (
         <div>
             {foodDetails && (
-                <div>
+                <>
                     <img id="food-img" src={foodDetails.imgurl} />
                     <h3>{foodDetails.name}</h3>
                     <h3>{foodDetails.description}</h3>
@@ -56,7 +56,7 @@ export default function FoodDetails(props) {
                         ADD TO BASKET (€ {foodDetails.price * amount})
                     </button>
                     <button onClick={closeDetails}>CLOSE</button>
-                </div>
+                </>
             )}
         </div>
     );

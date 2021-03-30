@@ -20,10 +20,14 @@ MIGHT:
 
 MISC:
 - ??? delete profile should delete all related tables with foreign keys?
+    - Alistair: can use without deleting related user_id
+    - have to check whenever user_id from other tables are in query to handle this! 
 - populate food, users, orders, etc.
 - otherProfile for only admin
 X - profileEditor like bioEditor in SN with all changes possible
-- finish orders sorting issue for users
+X - finish orders sorting issue for users
+    - alternative: show basket on order button click
+    - Pete will try to help tomoro (Wed)
 - all orders for admin with more like incremental search/IB
 - privateMsg between admin and any user (sockets)
 - findPeople like SN for admin only
