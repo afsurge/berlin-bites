@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(70, 70, 130);
+    background-color: rgb(216, 203, 183);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 #logo {
-    width: 50px;
+    width: 100px;
 }
 
 img {
@@ -74,4 +74,10 @@ img {
     width: 20px;
     align-self: flex-end;
     margin: 10px;
+}
+
+.userppic {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
 }

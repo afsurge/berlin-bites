@@ -2,7 +2,7 @@ import axios from "./axios";
 import { useState, useEffect } from "react";
 
 export default function Orders(props) {
-    const userId = props.user_id;
+    const userId = props.otherId ? props.otherId : props.user_id;
     const admin = props.admin;
     const [orders, setOrders] = useState();
     const [items, setItems] = useState();
@@ -54,8 +54,7 @@ export default function Orders(props) {
                 .catch((err) => {
                     console.log("Error getting orders for admin:", err.message);
                 });
-            // complete this part for admin viewing all orders!
-            // tips by Alistair for this!
+            // tips by Alistair for this so that deleted user orders still show up!
         }
     }, []);
 
@@ -80,7 +79,11 @@ export default function Orders(props) {
 
     return (
         <div>
-            {admin ? <h2>All customer orders</h2> : <h2>Your recent orders</h2>}
+            {admin ? (
+                <h2>All customer orders</h2>
+            ) : (
+                <h2>{props.otherId ? "Recent" : "Your recent"} orders</h2>
+            )}
             <>
                 <div>
                     {orders &&

@@ -8,6 +8,8 @@ import Basket from "./basket";
 import Orders from "./orders";
 import Profile from "./profile";
 import Uploader from "./uploader";
+import OtherProfile from "./otherprofile";
+import FindCustomers from "./findcustomers";
 
 export default class App extends Component {
     constructor() {
@@ -93,7 +95,7 @@ export default class App extends Component {
             <div id="mainAppContainer">
                 <div className="appTop">
                     <a id="logo-tag" href="/">
-                        <img id="logo" src="/net.png" />
+                        <img id="logo" src="/food1.png" />
                     </a>
                     <div id="navbar">
                         <a className="navlinks" href="/food">
@@ -113,6 +115,14 @@ export default class App extends Component {
                         <a className="navlinks" href="/profile">
                             PROFILE
                         </a>
+                        {this.state.admin && (
+                            <>
+                                <br></br>
+                                <a className="navlinks" href="/customers">
+                                    CUSTOMERS
+                                </a>
+                            </>
+                        )}
                         <br></br>
                         <a className="navlinks" href="/logout">
                             LOGOUT
@@ -177,6 +187,21 @@ export default class App extends Component {
                                 />
                             )}
                         />
+                        <Route path="/customers" component={FindCustomers} />
+                        {this.state.admin && (
+                            <Route
+                                path="/user/:id"
+                                render={(props) => (
+                                    <>
+                                        <OtherProfile
+                                            key={props.match.url}
+                                            match={props.match}
+                                            history={props.history}
+                                        />
+                                    </>
+                                )}
+                            />
+                        )}
                     </>
                 </BrowserRouter>
                 {this.state.showUploader && (
