@@ -8,16 +8,16 @@ export default function Profile(props) {
 
     function deleteProfile() {
         console.log("Want to delete this profile!");
-        axios
-            .get("/deleteProfile")
-            .then(({ data }) => {
-                if (data.success) {
-                    location.replace("/logout");
-                }
-            })
-            .catch((err) => {
-                console.log("Error deleting user profile:", err.message);
-            });
+        // axios
+        //     .get("/deleteProfile")
+        //     .then(({ data }) => {
+        //         if (data.success) {
+        //             location.replace("/logout");
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log("Error deleting user profile:", err.message);
+        //     });
     }
 
     return (

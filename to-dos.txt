@@ -18,10 +18,11 @@ MIGHT:
 - Language: www.i18next.com
 - PDF generation: www.npmjs.com/package/pdfkit
 
-Qs:
+MISC:
+- ??? delete profile should delete all related tables with foreign keys?
 - populate food, users, orders, etc.
 - otherProfile for only admin
-- profileEditor like bioEditor in SN with all changes possible
+X - profileEditor like bioEditor in SN with all changes possible
 - finish orders sorting issue for users
 - all orders for admin with more like incremental search/IB
 - privateMsg between admin and any user (sockets)
@@ -29,11 +30,11 @@ Qs:
 - add try-catch for localStorage
 X - share basket strategy with teachers (localStorage)
 X - REMOVE from basket issue with teachers
-X - how to insert hashpass (like SN) on table creation (like IB)?
+X - ??? how to insert hashpass (like SN) on table creation (like IB)?
     - David: generate manually in code with any password and insert that
     - Abrar: add/register user and change admin to true manually later
 X - confirm table fields with MuqitBhai
-X - email unique? only registered users should have unique emails, guest users can reuse...
+X - ??? email unique? only registered users should have unique emails, guest users can reuse...
     - only allow registered users to order!
 
 

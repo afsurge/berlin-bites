@@ -38,23 +38,25 @@ module.exports.getppicUrl = (userId) => {
     return db.query(q, params);
 };
 
-module.exports.getItemsByOrderId = (id) => {
+module.exports.getItemsByOrderId = (orderId) => {
     const q = `
-        SELECT *
+        SELECT orderitems.id, orderitems.order_id, orderitems.amount, food.id, food.name, food.price
         FROM orderitems
-        WHERE order_id = $1
+        JOIN food
+        ON orderitems.food_id = food.id
+        WHERE orderitems.order_id = $1
     `;
-    const params = [id];
+    const params = [orderId];
     return db.query(q, params);
 };
 
-module.exports.getOrdersByUserId = (id) => {
+module.exports.getOrdersByUserId = (userId) => {
     const q = `
         SELECT *
         FROM orders
         WHERE user_id = $1
     `;
-    const params = [id];
+    const params = [userId];
     return db.query(q, params);
 };
 

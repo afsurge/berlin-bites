@@ -30,7 +30,6 @@ export default class ProfileEditor extends Component {
     }
 
     handleChange(e) {
-        // console.log("change in text area:", e.target.value);
         this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -124,7 +123,7 @@ export default class ProfileEditor extends Component {
                     />
                 )}
                 <p>
-                    ⏲️ Joined on{" "}
+                    ✅️ Joined on{" "}
                     {this.props.userDetails.created_at.slice(0, 10)}
                 </p>
                 <button
@@ -141,6 +140,10 @@ export default class ProfileEditor extends Component {
                         SAVE
                     </button>
                 )}
+                <p>
+                    ⚠️ For changing your password, please log out and click on
+                    the "RESET PASSWORD" link at the LOGIN page.
+                </p>
             </div>
         );
     }
