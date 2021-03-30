@@ -332,6 +332,19 @@ app.post("/uploadppic", uploader.single("file"), s3.upload, (req, res) => {
         });
 });
 
+app.post("/profile", (req, res) => {
+    const userId = req.session.userId;
+    const { email, address, phone } = req.body;
+    console.log("Received profile (server):", email, address, phone);
+    db.updateProfile(email, address, phone, userId)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("Error updating profile (server):", err.message);
+        });
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");

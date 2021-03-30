@@ -8,6 +8,16 @@ const db = spicedPg(
 
 // NEWEST AT TOP
 
+module.exports.updateProfile = (email, address, phone, userId) => {
+    const q = `
+        UPDATE users
+        SET email = $1, address = $2, phone = $3
+        WHERE id = $4
+    `;
+    const params = [email, address, phone, userId];
+    return db.query(q, params);
+};
+
 module.exports.updateppic = (ppicurl, userId) => {
     const q = `
         UPDATE users

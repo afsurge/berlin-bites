@@ -7,7 +7,12 @@ export default function ProfilePic(props) {
                 className={props.class2}
                 src={ppicurl}
                 alt={props.last}
-                onClick={props.toggleUploader}
+                onClick={() =>
+                    location.pathname == "/profile"
+                        ? props.toggleUploader()
+                        : location.replace("/profile")
+                }
+                // onClick={props.toggleUploader}
             />
         </div>
     );

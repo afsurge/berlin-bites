@@ -80,11 +80,8 @@ export default class App extends Component {
         });
     }
 
-    updateProfileInApp(profileFromBioEditor) {
-        console.log(
-            "Received profile in App from ProfileEditor:",
-            profileFromBioEditor
-        );
+    updateProfileInApp(newProfile) {
+        console.log("Received profile in App from ProfileEditor:", newProfile);
     }
 
     render() {

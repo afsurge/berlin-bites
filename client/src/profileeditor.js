@@ -6,12 +6,6 @@ export default class ProfileEditor extends Component {
         super(props);
         this.state = {
             edit: false,
-            // bioDraft: "",
-            // bioText: "",
-            firstDraft: "",
-            firstText: "",
-            lastDraft: "",
-            lastText: "",
             phoneDraft: "",
             phoneText: "",
             emailDraft: "",
@@ -24,28 +18,20 @@ export default class ProfileEditor extends Component {
     }
 
     componentDidMount() {
-        // console.log("Bio in BioEditor:", this.props.bio);
-        // if (this.props.userDetails) {
         this.setState({
             buttonTxt: "EDIT",
-            firstText: this.props.userDetails.first,
-            lastText: this.props.userDetails.last,
             phoneText: this.props.userDetails.phone,
             emailText: this.props.userDetails.email,
-            addressText: this.props.userDetails.address,
+            addressText: this.props.userDetails.address
+                ? this.props.userDetails.address
+                : "You can add your address here.",
             created_at: this.props.userDetails.created_at,
         });
-        // } else {
-        //     this.setState({
-        //         buttonTxt: "ADD",
-        //         bioText: "Tell us about yourself!",
-        //     });
-        // }
     }
 
     handleChange(e) {
         // console.log("change in text area:", e.target.value);
-        this.setState({ bioDraft: e.target.value });
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     handleClick() {
@@ -55,24 +41,45 @@ export default class ProfileEditor extends Component {
         });
     }
 
-    updateBio() {
-        console.log("Bio to send to server:", this.state.bioDraft);
+    updateProfile() {
+        console.log(
+            "Profile updates to send to server:",
+            this.state.emailDraft,
+            this.state.addressDraft,
+            this.state.phoneDraft
+        );
 
-        if (this.state.bioDraft == "") {
+        if (
+            this.state.emailDraft == "" &&
+            this.state.addressDraft == "" &&
+            this.state.phoneDraft == ""
+        ) {
             return this.setState({ edit: false });
         }
 
         axios
-            .post("/bio", { bio: this.state.bioDraft })
+            .post("/profile", {
+                email: this.state.emailDraft
+                    ? this.state.emailDraft
+                    : this.state.emailText,
+                address: this.state.addressDraft
+                    ? this.state.addressDraft
+                    : this.state.addressText,
+                phone: this.state.phoneDraft
+                    ? this.state.phoneDraft
+                    : this.state.phoneText,
+            })
             .then(({ data }) => {
-                console.log("Response from server after Bio update:", data);
+                console.log("Response from server after Profile update:", data);
                 if (data.success) {
                     this.setState({
-                        bioText: this.state.bioDraft,
+                        emailText: this.state.emailDraft,
+                        addressText: this.state.addressDraft,
+                        phoneText: this.state.phoneDraft,
                         edit: false,
                     });
-                    this.props.updateBioInApp(this.state.bioDraft);
-                    location.replace("/");
+                    this.props.updateProfileInApp(this.state.emailDraft);
+                    location.replace("/profile");
                 }
             })
             .catch((err) => {
@@ -85,26 +92,51 @@ export default class ProfileEditor extends Component {
 
     render() {
         return (
-            <div id="bioeditor">
-                <h2>ABOUT ME</h2>
-                <p className="biotext">{this.state.bioText}</p>
+            <div id="profile-editor">
+                <h2>
+                    {this.props.userDetails.first} {this.props.userDetails.last}
+                </h2>
+                <p className="profile-text">📧️ {this.state.emailText}</p>
                 {this.state.edit && (
                     <textarea
-                        id="biotexteditor"
-                        defaultValue={this.props.bio}
+                        name="emailDraft"
+                        className="profile-texteditor"
+                        defaultValue={this.props.userDetails.email}
                         onChange={(e) => this.handleChange(e)}
                     />
                 )}
+                <p className="profile-text">🏠️ {this.state.addressText}</p>
+                {this.state.edit && (
+                    <textarea
+                        name="addressDraft"
+                        className="profile-texteditor"
+                        defaultValue={this.props.userDetails.address}
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                )}
+                <p className="profile-text">📱️ {this.state.phoneText}</p>
+                {this.state.edit && (
+                    <textarea
+                        name="phoneDraft"
+                        className="profile-texteditor"
+                        defaultValue={this.props.userDetails.phone}
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                )}
+                <p>
+                    ⏲️ Joined on{" "}
+                    {this.props.userDetails.created_at.slice(0, 10)}
+                </p>
                 <button
-                    className="bioButtons"
+                    className="profile-buttons"
                     onClick={() => this.handleClick()}
                 >
                     {this.state.buttonTxt}
                 </button>
                 {this.state.edit && (
                     <button
-                        className="bioButtons"
-                        onClick={() => this.updateBio()}
+                        className="profile-buttons"
+                        onClick={() => this.updateProfile()}
                     >
                         SAVE
                     </button>
