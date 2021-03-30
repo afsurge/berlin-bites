@@ -95,7 +95,14 @@ export default function Basket(props) {
     return (
         <div>
             {/* <h3>User: {props.user_id}</h3> */}
-            {!foodInfo && <h3>There are no food in your basket!</h3>}
+            {!foodInfo && (
+                <div>
+                    <h3>You have not added anything to your basket yet! 🙃️</h3>
+                    <h3>
+                        All food can be found <a href="/food">HERE</a>
+                    </h3>
+                </div>
+            )}
             {foodInfo &&
                 foodInfo.map(function (food, i) {
                     return (
