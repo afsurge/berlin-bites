@@ -12,6 +12,7 @@ const multer = require("multer");
 const uidSafe = require("uid-safe");
 const s3 = require("./s3");
 const config = require("./config.json");
+const { default: axios } = require("axios");
 
 //// for S3 upload ////
 
@@ -299,6 +300,20 @@ app.get("/orders/:id", (req, res) => {
                 console.log("Error getting orders for this user:", err.message);
             });
     }
+});
+
+app.get("/orderitems/:id", (req, res) => {
+    const orderId = req.params.id;
+    db.getItemsByOrderId(orderId)
+        .then(({ rows }) => {
+            // console.log("Items for this order:", rows);
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log(
+                `Error getting items for order ${orderId}: ${err.message}`
+            );
+        });
 });
 
 app.post("/uploadppic", uploader.single("file"), s3.upload, (req, res) => {
