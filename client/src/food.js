@@ -1,13 +1,20 @@
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import FoodTypes from "./foodtypes";
+import { useState } from "react";
 
 export default function Food(props) {
+    // const pathname = location.pathname;
+    // console.log(pathname);
+    // const showTypes = true;
+    const [showTypes, setShowTypes] = useState(true);
+
     return (
         <div>
-            {location.pathname == "/food" && (
-                <div className="food-types">
+            {/* {location.pathname == "/food" && (
+                <div id="food-types">
                     <Link to="/food/starters">STARTERS</Link>
                     <a href="/food/starters">
+                        <img src=""></img>
                         <h2>STARTERS</h2>
                     </a>
                     <a href="/food/main">
@@ -20,9 +27,46 @@ export default function Food(props) {
                         <h2>DESSERTS</h2>
                     </a>
                 </div>
-            )}
+            )} */}
             <BrowserRouter>
                 <>
+                    {showTypes && (
+                        <div id="food-types">
+                            <Link
+                                to="/food/starters"
+                                onClick={() => {
+                                    setShowTypes(false);
+                                }}
+                            >
+                                STARTERS
+                            </Link>
+                            <Link
+                                to="/food/main"
+                                onClick={() => {
+                                    setShowTypes(false);
+                                }}
+                            >
+                                MAIN DISHES
+                            </Link>
+                            <Link
+                                to="/food/sides"
+                                onClick={() => {
+                                    setShowTypes(false);
+                                }}
+                            >
+                                SIDE DISHES
+                            </Link>
+                            <Link
+                                to="/food/dessert"
+                                onClick={() => {
+                                    setShowTypes(false);
+                                }}
+                            >
+                                DESSERTS
+                            </Link>
+                        </div>
+                    )}
+
                     <Route
                         path="/food/starters"
                         render={() => (
@@ -63,6 +107,16 @@ export default function Food(props) {
                             />
                         )}
                     />
+                    {!showTypes && (
+                        <Link
+                            to="/food"
+                            onClick={() => {
+                                setShowTypes(true);
+                            }}
+                        >
+                            BACK
+                        </Link>
+                    )}
                 </>
             </BrowserRouter>
         </div>

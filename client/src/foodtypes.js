@@ -2,6 +2,7 @@ import axios from "./axios";
 import { useState, useEffect } from "react";
 // import { BrowserRouter, Route } from "react-router-dom";
 import FoodDetails from "./fooddetails";
+import { Link } from "react-router-dom";
 
 export default function FoodTypes(props) {
     const [foodId, setFoodId] = useState();
@@ -81,7 +82,6 @@ export default function FoodTypes(props) {
 
     return (
         <div>
-            <h1>ANYTHING!</h1>
             {props.type == "starter" && <h1>STARTERS</h1>}
             {props.type == "main" && <h1>MAIN DISHES</h1>}
             {props.type == "side" && <h1>SIDE DISHES</h1>}
@@ -99,7 +99,6 @@ export default function FoodTypes(props) {
                         );
                     })}
             </div>
-
             {foodId && (
                 <FoodDetails
                     foodId={foodId}
@@ -109,7 +108,7 @@ export default function FoodTypes(props) {
                     // path={location.pathname}
                 />
             )}
-            <button onClick={() => location.replace("/food")}>BACK</button>
+            {/* <button onClick={() => location.replace("/food")}>BACK</button> */}
             {props.admin && (
                 <div id="foodUploader">
                     <input
