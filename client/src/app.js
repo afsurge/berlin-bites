@@ -10,6 +10,7 @@ import Profile from "./profile";
 import Uploader from "./uploader";
 import OtherProfile from "./otherprofile";
 import FindCustomers from "./findcustomers";
+import Chat from "./chat";
 
 export default class App extends Component {
     constructor() {
@@ -95,50 +96,52 @@ export default class App extends Component {
             <div id="mainAppContainer">
                 <div className="appTop">
                     <a id="logo-tag" href="/">
-                        <img id="logo" src="/food1.png" />
+                        <img id="logo" src="/food-to-go-1.png" />
                     </a>
+                    <div id="brand">
+                        <h1 className="brand-name">Berlin</h1>
+                        <h1 className="brand-name">Bites</h1>
+                    </div>
                     <div id="navbar">
                         <a className="navlinks" href="/food">
                             FOOD
                         </a>
-                        <br></br>
                         <a className="navlinks" href="/orders">
                             ORDERS
                         </a>
-                        <br></br>
-                        <a className="navlinks" href="/basket">
-                            BASKET
-                            {this.state.basket_count &&
-                                `(${this.state.basket_count})`}
-                        </a>
-                        <br></br>
+                        {!this.state.admin && (
+                            <a className="navlinks" href="/basket">
+                                BASKET
+                                {this.state.basket_count &&
+                                    `(${this.state.basket_count})`}
+                            </a>
+                        )}
+
                         <a className="navlinks" href="/profile">
                             PROFILE
                         </a>
+                        <a className="navlinks" href="/messages">
+                            MESSAGES
+                        </a>
                         {this.state.admin && (
-                            <>
-                                <br></br>
-                                <a className="navlinks" href="/customers">
-                                    CUSTOMERS
-                                </a>
-                            </>
+                            <a className="navlinks" href="/customers">
+                                CUSTOMERS
+                            </a>
                         )}
-                        <br></br>
                         <a className="navlinks" href="/logout">
                             LOGOUT
                         </a>
                     </div>
+                    <div id="greet-profile">
+                        <ProfilePic
+                            ppicurl={this.state.ppicurl}
+                            toggleUploader={this.toggleUploader}
+                            class2="smallppic"
+                        />
+                        <h1 id="greetuser">Hi {this.state.first} !</h1>
+                    </div>
                 </div>
-                <div id="greet-profile">
-                    <h1 id="greetuser">
-                        Hi {this.state.first} {this.state.last}!
-                    </h1>
-                    <ProfilePic
-                        ppicurl={this.state.ppicurl}
-                        toggleUploader={this.toggleUploader}
-                        class2="smallppic"
-                    />
-                </div>
+
                 <BrowserRouter>
                     <>
                         <Route
@@ -188,6 +191,11 @@ export default class App extends Component {
                             )}
                         />
                         <Route path="/customers" component={FindCustomers} />
+                        {/* <Route path="/messages" component={Chat} /> */}
+                        <Route
+                            path="/messages"
+                            render={() => <Chat admin={this.state.admin} />}
+                        />
                         {this.state.admin && (
                             <Route
                                 path="/user/:id"

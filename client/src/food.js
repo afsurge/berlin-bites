@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import FoodTypes from "./foodtypes";
 
 export default function Food(props) {
@@ -6,6 +6,7 @@ export default function Food(props) {
         <div>
             {location.pathname == "/food" && (
                 <div className="food-types">
+                    <Link to="/food/starters">STARTERS</Link>
                     <a href="/food/starters">
                         <h2>STARTERS</h2>
                     </a>

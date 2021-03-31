@@ -52,7 +52,8 @@ CREATE TABLE orderitems (
 
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
-    sender_id INT REFERENCES users(id) NOT NULL,
+    sender_id INT REFERENCES users(id) DEFAULT 1,
+    recipient_id INT REFERENCES users(id) DEFAULT 1,
     msg TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

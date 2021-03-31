@@ -6,17 +6,15 @@ import ResetPass from "./resetpass";
 export default function Welcome() {
     return (
         <div id="welcome">
-            <div id="welcome-container">
-                <h1>BerlinBites</h1>
-                <a href="/welcome#/register">REGISTER</a>
-                <br></br>
-                <a href="/welcome#/login">LOGIN</a>
-                <br></br>
-                <a href="/welcome#/resetpass">RESET PASSWORD</a>
+            <div id="name-logo">
+                {/* <h1>Berlin</h1> */}
+                <img id="welcome-logo" src="./food-to-go-1.png" />
+                <h1>Berlin Bites</h1>
             </div>
+            <h1 id="welcome-tag">Home-made goodness...</h1>
             <HashRouter>
                 <>
-                    <Route path="/register" component={Register} />
+                    <Route exact path="/" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/resetpass" component={ResetPass} />
                 </>

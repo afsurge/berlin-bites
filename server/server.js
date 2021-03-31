@@ -12,7 +12,14 @@ const multer = require("multer");
 const uidSafe = require("uid-safe");
 const s3 = require("./s3");
 const config = require("./config.json");
-const { default: axios } = require("axios");
+
+//// socket.io ////
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+//// socket.io ////
 
 //// for S3 upload ////
 
@@ -37,12 +44,20 @@ const uploader = multer({
 //// for S3 upload ////
 
 //// middlewares ////
-app.use(
-    cookieSession({
-        secret: `I love to eat.`,
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-    })
-);
+const cookieSessionMware = cookieSession({
+    secret: `I love to eat.`,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+});
+app.use(cookieSessionMware);
+io.use(function (socket, next) {
+    cookieSessionMware(socket.request, socket.request.res, next);
+});
+// app.use(
+//     cookieSession({
+//         secret: `I love to eat.`,
+//         maxAge: 1000 * 60 * 60 * 24 * 14,
+//     })
+// );
 app.use(csurf());
 app.use(function (req, res, next) {
     res.cookie("dtoken", req.csrfToken());
@@ -420,17 +435,17 @@ app.get("/users/:name", (req, res) => {
     }
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
     } else {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
-});
-
-app.get("/logout", (req, res) => {
-    req.session = null;
-    res.redirect("/");
 });
 
 app.get("*", function (req, res) {
@@ -443,6 +458,74 @@ app.get("*", function (req, res) {
 
 //// routes ////
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log(".: 🍽️  Delicacies are about to be served 🍱️ :.");
+});
+
+io.on("connection", (socket) => {
+    const userId = socket.request.session.userId;
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+
+    // if (userId === 1) {
+    db.getMessages()
+        .then(({ rows }) => {
+            // console.log("Last 10 messages:", rows.reverse());
+            socket.emit("chatMessages", rows.reverse());
+        })
+        .catch((err) => {
+            console.log("Error getting latest chat messages:", err.message);
+        });
+    // } else {
+    //     db.getMessagesForUser([1, userId])
+    //         .then(({ rows }) => {
+    //             // console.log("Last 10 messages:", rows.reverse());
+    //             socket.emit("chatMessages", rows.reverse());
+    //         })
+    //         .catch((err) => {
+    //             console.log("Error getting latest chat messages:", err.message);
+    //         });
+    // }
+
+    socket.on("chatMessageByUser", (data) => {
+        console.log(`New chat msg by userId:${userId} with msg:${data}`);
+        db.addMessage(userId, data)
+            .then(({ rows }) => {
+                const created_at = rows[0].created_at;
+                const msg_id = rows[0].id;
+                console.log("Chat msg added to db!");
+                db.getUserById(userId)
+                    .then(({ rows }) => {
+                        // console.log("Details of chat msg sender:", rows[0]);
+                        io.emit("chatMessageByUser", {
+                            first: rows[0].first,
+                            last: rows[0].last,
+                            ppicurl: rows[0].ppicurl,
+                            id: msg_id,
+                            msg: data,
+                            created_at: created_at,
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(
+                            "Error getting details of chat msg sender:",
+                            err.message
+                        );
+                    });
+            })
+            .catch((err) => {
+                console.log("Error adding chat msg to db:", err.message);
+            });
+
+        console.log(
+            `socket with id:${socket.id} with userId:${userId} has connected!`
+        );
+
+        socket.on("disconnect", () => {
+            console.log(
+                `socket with id:${socket.id} with userId:${userId} has DISCONNECTED!`
+            );
+        });
+    });
 });

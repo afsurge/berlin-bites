@@ -81,6 +81,7 @@ export default function FoodTypes(props) {
 
     return (
         <div>
+            <h1>ANYTHING!</h1>
             {props.type == "starter" && <h1>STARTERS</h1>}
             {props.type == "main" && <h1>MAIN DISHES</h1>}
             {props.type == "side" && <h1>SIDE DISHES</h1>}

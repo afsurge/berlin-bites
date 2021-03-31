@@ -43,7 +43,7 @@ export default class Register extends Component {
     render() {
         return (
             <div id="regForm">
-                <h1>Registration</h1>
+                <h1>Join us today!</h1>
                 <h3>
                     Please provide the minimum details for signing up with us.
                 </h3>

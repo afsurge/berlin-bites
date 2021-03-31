@@ -1,24 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Niconne&family=Sacramento&family=Titillium+Web:ital,wght@0,400;0,700;1,400&display=swap");
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    font-family: "Titillium Web", sans-serif;
 }
 
 body {
-    background-color: whitesmoke;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px 15%;
+    background-color: #dedbd2;
+}
+
+#name-logo {
+    display: flex;
+    flex-direction: column;
+    /* padding: 20px 0px; */
+    justify-content: center;
+    align-items: center;
+}
+
+#name-logo h1 {
+    font-family: "Sacramento", cursive;
+    font-size: 6em;
+    color: #45305f;
+    height: 100px;
+}
+
+#welcome-logo {
+    margin: 20px 0px 0px 0px;
+}
+
+#welcome-tag {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+}
+
+#agree-check {
+    width: 30px;
+    align-self: center;
 }
 
 .appTop {
-    background-image: url(/home-background.jpg);
+    background-image: url(/home-background-1.jpg);
     background-size: cover;
     height: 500px;
 }
 
-#welcome {
+#brand {
+    position: absolute;
+    top: 80px;
+    left: 520px;
+}
+
+.brand-name {
+    text-align: center;
+    font-family: "Sacramento", cursive;
+    color: #087e8b;
+    font-size: 8em;
+    text-shadow: 5px 5px #45305f;
+}
+
+#navbar {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    /* align-items: center; */
+    /* margin: 20px; */
+    width: 200px;
+}
+
+.navlinks {
+    text-decoration: none;
+    background-color: #45305f;
+    color: #dedbd2;
+    margin: 10px;
+    font-size: 1.2em;
+    height: 35px;
+    border: 2px solid #087e8b;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.navlinks:hover {
+    background-color: #087e8b;
+    transition: all 500ms ease;
+}
+
+#greet-profile {
+    display: flex;
+}
+
+#greetuser {
+    padding: 15px 5px;
+    color: #dedbd2;
+    text-shadow: 2px 2px #087e8b;
 }
 
 #regForm,
@@ -26,16 +100,42 @@ body {
 #resetForm {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+textarea,
+input {
+    color: #087e8b;
+    font-size: 1.5em;
+}
+
+input {
+    text-align: center;
     width: 500px;
-    background-color: rgb(40, 40, 120);
-    border: 2px solid green;
-    position: absolute;
-    top: 100px;
-    align-self: center;
+    border: none;
+    margin: 5px;
 }
 
 #logo {
-    width: 100px;
+    width: 60px;
+    margin: 10px;
+    background-color: #dedbd2;
+    padding: 2px;
+}
+
+button {
+    background-color: #087e8b;
+    color: #dedbd2;
+    font-size: 1.5em;
+    border: 2px solid #45305f;
+    border-radius: 5px;
+    margin: 10px;
+    width: 300px;
+}
+
+button:hover {
+    background-color: #b23a48;
+    transition: all 500ms ease;
 }
 
 img {
@@ -43,8 +143,11 @@ img {
 }
 
 .smallppic {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border: 2px solid #087e8b;
+    border-radius: 5px;
 }
 
 .largeppic {
@@ -90,4 +193,11 @@ img {
     height: 100px;
     width: 100px;
     object-fit: cover;
+}
+
+.chat-img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    margin: 5px;
 }
