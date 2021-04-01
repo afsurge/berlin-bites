@@ -34,14 +34,16 @@ export default function Profile(props) {
                     props.updateProfileInApp(profile)
                 }
             />
-            <button
-                id="del-profile-button"
-                onClick={() => {
-                    setDeleteConfirm(true);
-                }}
-            >
-                DELETE PROFILE
-            </button>
+            {!props.userDetails.admin && (
+                <button
+                    id="del-profile-button"
+                    onClick={() => {
+                        setDeleteConfirm(true);
+                    }}
+                >
+                    DELETE PROFILE
+                </button>
+            )}
             {deleteConfirm && (
                 <div id="deleter">
                     <div id="del-confirmer">

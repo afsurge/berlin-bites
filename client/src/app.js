@@ -178,9 +178,9 @@ export default class App extends Component {
                                         CUSTOMERS
                                     </Link>
                                 )}
-                                <Link className="navlinks" to="/logout">
+                                <a className="navlinks" href="/logout">
                                     LOGOUT
-                                </Link>
+                                </a>
                             </div>
                             <div id="greet-profile">
                                 <ProfilePic
