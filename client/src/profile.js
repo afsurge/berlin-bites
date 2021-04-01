@@ -1,6 +1,6 @@
 import ProfilePic from "./profilepic";
 import ProfileEditor from "./profileeditor";
-import axios from "./axios";
+// import axios from "./axios";
 import { useState } from "react";
 
 export default function Profile(props) {
@@ -22,18 +22,22 @@ export default function Profile(props) {
 
     return (
         <div id="profile">
-            <ProfilePic
-                ppicurl={props.userDetails.ppicurl}
-                toggleUploader={() => props.toggleUploader()}
-                class1="withProfileEditor"
-                class2="largeppic"
-            />
-            <ProfileEditor
-                userDetails={props.userDetails}
-                updateProfileInApp={(profile) =>
-                    props.updateProfileInApp(profile)
-                }
-            />
+            <h1>Your Profile</h1>
+            <div id="ppic-with-editor">
+                <ProfilePic
+                    ppicurl={props.userDetails.ppicurl}
+                    toggleUploader={() => props.toggleUploader()}
+                    class1="with-editor"
+                    class2="largeppic"
+                />
+                <ProfileEditor
+                    userDetails={props.userDetails}
+                    updateProfileInApp={(profile) =>
+                        props.updateProfileInApp(profile)
+                    }
+                />
+            </div>
+
             {!props.userDetails.admin && (
                 <button
                     id="del-profile-button"
@@ -45,12 +49,12 @@ export default function Profile(props) {
                 </button>
             )}
             {deleteConfirm && (
-                <div id="deleter">
+                <div id="del-container">
                     <div id="del-confirmer">
-                        <h3>
+                        <h2>
                             Are you sure you want to completely delete your
                             account?
-                        </h3>
+                        </h2>
                         <button id="del-yes" onClick={deleteProfile}>
                             YES
                         </button>

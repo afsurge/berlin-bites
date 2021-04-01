@@ -95,34 +95,40 @@ export default class ProfileEditor extends Component {
                 <h2>
                     {this.props.userDetails.first} {this.props.userDetails.last}
                 </h2>
-                <p className="profile-text">📧️ {this.state.emailText}</p>
-                {this.state.edit && (
-                    <textarea
-                        name="emailDraft"
-                        className="profile-texteditor"
-                        defaultValue={this.props.userDetails.email}
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                )}
-                <p className="profile-text">🏠️ {this.state.addressText}</p>
-                {this.state.edit && (
-                    <textarea
-                        name="addressDraft"
-                        className="profile-texteditor"
-                        defaultValue={this.props.userDetails.address}
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                )}
-                <p className="profile-text">📱️ {this.state.phoneText}</p>
-                {this.state.edit && (
-                    <textarea
-                        name="phoneDraft"
-                        className="profile-texteditor"
-                        defaultValue={this.props.userDetails.phone}
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                )}
-                <p>
+                <div className="profile-text-area">
+                    <p className="profile-text">📧️ {this.state.emailText}</p>
+                    {this.state.edit && (
+                        <textarea
+                            name="emailDraft"
+                            className="profile-texteditor"
+                            defaultValue={this.props.userDetails.email}
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    )}
+                </div>
+                <div className="profile-text-area">
+                    <p className="profile-text">🏠️ {this.state.addressText}</p>
+                    {this.state.edit && (
+                        <textarea
+                            name="addressDraft"
+                            className="profile-texteditor"
+                            defaultValue={this.props.userDetails.address}
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    )}
+                </div>
+                <div className="profile-text-area">
+                    <p className="profile-text">📱️ {this.state.phoneText}</p>
+                    {this.state.edit && (
+                        <textarea
+                            name="phoneDraft"
+                            className="profile-texteditor"
+                            defaultValue={this.props.userDetails.phone}
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    )}
+                </div>
+                <p className="profile-text">
                     ✅️ Joined on{" "}
                     {this.props.userDetails.created_at.slice(0, 10)}
                 </p>
@@ -140,7 +146,7 @@ export default class ProfileEditor extends Component {
                         SAVE
                     </button>
                 )}
-                <p>
+                <p className="profile-text">
                     ⚠️ For changing your password, please log out and click on
                     the "RESET PASSWORD" link at the LOGIN page.
                 </p>

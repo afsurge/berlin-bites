@@ -153,8 +153,10 @@ img {
 }
 
 .largeppic {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
+    /* object-fit: cover; */
+    border: 5px solid #45305f;
 }
 
 #food-types {
@@ -322,10 +324,16 @@ img {
     width: 100px;
 }
 
-#orders h2 {
+#orders h2,
+#profile h1,
+#profile-editor h2 {
     font-family: "Sacramento", cursive;
     font-size: 3.5em;
     color: #45305f;
+}
+
+#profile-editor h2 {
+    height: 60px;
 }
 
 #orders-items {
@@ -347,6 +355,79 @@ img {
     align-items: center;
     width: 600px;
     font-size: 1.5em;
+}
+
+#ppic-with-editor {
+    display: flex;
+    justify-content: center;
+}
+
+#profile-editor {
+    margin: 10px;
+}
+
+.profile-text {
+    font-size: 1.5em;
+    margin: 10px 0px 0px 0px;
+}
+
+#del-profile-button {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.profile-text-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-texteditor {
+    outline: none;
+    resize: none;
+}
+
+#del-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#del-confirmer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 550px;
+    height: 250px;
+    text-align: center;
+    color: #dedbd2;
+    background-color: #45305f;
+    border: 5px solid darkred;
+    border-radius: 10px;
+}
+
+#del-confirmer h2 {
+    margin: 10px;
+}
+
+#del-yes,
+#del-no {
+    width: 200px;
+    align-self: center;
+    border: 2px solid #dedbd2;
+}
+
+#del-yes:hover {
+    background-color: darkred;
+}
+
+#del-no:hover {
+    background-color: green;
 }
 
 #uploader {
