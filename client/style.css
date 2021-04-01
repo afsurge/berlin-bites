@@ -105,6 +105,12 @@ body {
     align-items: center;
 }
 
+#regForm input,
+#loginForm input,
+#resetForm input {
+    border-radius: 20px;
+}
+
 textarea,
 input {
     color: #087e8b;
@@ -332,7 +338,9 @@ img {
 #orders h2,
 #profile h1,
 #profile-editor h2,
-#cart-items-container h2 {
+#cart-items-container h2,
+#full-chat h2,
+#findCustomers h2 {
     font-family: "Sacramento", cursive;
     font-size: 3.5em;
     color: #45305f;
@@ -349,7 +357,7 @@ img {
     width: 100%;
     border: 5px solid #45305f;
     border-radius: 10px;
-    margin: 20px;
+    margin: 20px 0px;
 }
 
 .order-item * {
@@ -411,7 +419,6 @@ img {
     text-align: center;
     width: 550px;
     height: 250px;
-    text-align: center;
     color: #dedbd2;
     background-color: #45305f;
     border: 5px solid darkred;
@@ -437,26 +444,29 @@ img {
     background-color: green;
 }
 
-#uploader {
-    display: flex;
-    flex-direction: column;
-    /* position: fixed; */
-    /* background-color: #434c5e; */
-    /* color: rgb(90, 90, 90); */
-    width: 550px;
-    height: 200px;
-    text-align: center;
-    border: 2px solid black;
-    border-radius: 10px;
-}
-
 #uploaderContainer {
     display: flex;
-    /* position: fixed; */
+    position: absolute;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+#uploader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 200px;
+    text-align: center;
+    background-color: #45305f;
+    color: #dedbd2;
+    border: 2px solid #dedbd2;
+    border-radius: 10px;
 }
 
 #closeUploader {
@@ -466,10 +476,27 @@ img {
     margin: 10px;
 }
 
+#uploader-input {
+    border: 1px solid #dedbd2;
+}
+
 .userppic {
     height: 100px;
     width: 100px;
     object-fit: cover;
+}
+
+#chat-container {
+    background-color: #087e8b;
+    height: 600px;
+    width: 500px;
+    overflow-y: auto;
+    border: 2px solid #45305f;
+}
+
+.chat-block {
+    display: flex;
+    flex-direction: row;
 }
 
 .chat-img {
@@ -477,4 +504,61 @@ img {
     width: 50px;
     object-fit: cover;
     margin: 5px;
+    border-radius: 10px;
+}
+
+.chat-details {
+    display: inline-block;
+}
+
+.chat-details * {
+    color: #dedbd2;
+}
+
+#chat-msg-editor {
+    width: 500px;
+    height: 80px;
+    font-size: 1em;
+    background-color: #45305f;
+    outline: none;
+    resize: none;
+    color: #dedbd2;
+    border: 2px solid white;
+}
+
+#full-chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.error-msg {
+    color: red;
+    font-size: 1.5em;
+}
+
+#findCustomers {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.find-customer-link {
+    text-decoration: none;
+}
+
+.customer {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    background-color: #087e8b;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.customer h1 {
+    margin: 0px 20px;
+    color: #dedbd2;
 }

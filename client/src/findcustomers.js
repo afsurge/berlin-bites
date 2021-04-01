@@ -39,11 +39,19 @@ export default function FindCustomers() {
 
     return (
         <div id="findCustomers">
-            <h2>FIND CUSTOMERS</h2>
-            {searchTerm == undefined && <h3>Latest customers</h3>}
+            <h2>Customers</h2>
+            {/* {searchTerm == undefined && <h3>Latest customers</h3>} */}
             {searchTerm == undefined || (
                 <h3>Search results for: "{searchTerm}"</h3>
             )}
+            <h3>Find specific customer</h3>
+            <input
+                defaultValue={searchTerm}
+                onChange={({ target }) => {
+                    setSearchTerm(target.value);
+                }}
+                placeholder="Enter name here"
+            />
             {resultUsers &&
                 resultUsers.map(function (user) {
                     return (
@@ -58,23 +66,15 @@ export default function FindCustomers() {
                                             className="userppic"
                                             src={user.ppicurl}
                                         />
-                                        <h2>
+                                        <h1>
                                             {user.first} {user.last}
-                                        </h2>
+                                        </h1>
                                     </div>
                                 </Link>
                             )}
                         </div>
                     );
                 })}
-            <h3>Find specific customer</h3>
-            <input
-                defaultValue={searchTerm}
-                onChange={({ target }) => {
-                    setSearchTerm(target.value);
-                }}
-                placeholder="Enter name here"
-            />
         </div>
     );
 }

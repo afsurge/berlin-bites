@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "./axios";
 
 export default function Basket(props) {
@@ -97,9 +98,9 @@ export default function Basket(props) {
             {/* <h3>User: {props.user_id}</h3> */}
             {!foodInfo && (
                 <div>
-                    <h3>You have not added anything to your basket yet! 🙃️</h3>
+                    <h2>You have not added anything to your cart yet! 🙃️</h2>
                     <h3>
-                        All food can be found <a href="/food">HERE</a>
+                        Check out our menu <Link to="/food">HERE</Link> 😃️
                     </h3>
                 </div>
             )}

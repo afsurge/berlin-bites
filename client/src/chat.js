@@ -12,13 +12,8 @@ export default function Chat() {
     let chatMsg = "";
 
     useEffect(() => {
-        // console.log("scrollHeight:", elemRef.current.scrollHeight);
-        // console.log("clientHeight:", elemRef.current.clientHeight);
-        // console.log("scrollTop:", elemRef.current.scrollTop);
-        // elemRef.current.scrollTop = 100;
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
-        // console.log("new scrollTop:", elemRef.current.scrollTop);
     }, [chatMessages]);
 
     function sendChatMsg(e) {
@@ -33,8 +28,11 @@ export default function Chat() {
 
     return (
         <div id="full-chat">
-            <h2>MESSAGES</h2>
-            <h3>You can chat with everyone in the network!</h3>
+            <h2>Messages</h2>
+            <h3>
+                Let the caterer know your experience, concerns and any feedback
+                😇️
+            </h3>
             <div id="chat-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map(function (user_msg) {
