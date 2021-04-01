@@ -2,7 +2,7 @@ import axios from "./axios";
 import { useState, useEffect } from "react";
 // import { BrowserRouter, Route } from "react-router-dom";
 import FoodDetails from "./fooddetails";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function FoodTypes(props) {
     const [foodId, setFoodId] = useState();
@@ -94,6 +94,58 @@ export default function FoodTypes(props) {
             {props.type == "dessert" && (
                 <h1 className="food-type-h1">Dessert</h1>
             )}
+            {props.admin && (
+                <div id="foodUploader">
+                    <h2>UPLOADER</h2>
+                    <div id="food-upload-inputs">
+                        <input
+                            name="name"
+                            placeholder="name"
+                            className="food-upload-input-long"
+                            onChange={({ target }) => {
+                                setName(target.value);
+                            }}
+                        />
+                        <input
+                            defaultValue={props.type}
+                            name="type"
+                            placeholder="type"
+                            className="food-upload-input-short"
+                            onChange={({ target }) => {
+                                setType(target.value);
+                            }}
+                        />
+                        <input
+                            name="description"
+                            placeholder="description"
+                            className="food-upload-input-long"
+                            onChange={({ target }) => {
+                                setDescription(target.value);
+                            }}
+                        />
+                        <input
+                            name="price"
+                            placeholder="price in €"
+                            className="food-upload-input-short"
+                            onChange={({ target }) => {
+                                setPrice(target.value);
+                            }}
+                        />
+                    </div>
+                    <div id="food-upload-select">
+                        <input
+                            onChange={({ target }) => {
+                                setFoodFile(target.files[0]);
+                            }}
+                            id="food-selector"
+                            name="file"
+                            type="file"
+                            accept="image/*"
+                        />
+                        <button onClick={foodUpload}>UPLOAD</button>
+                    </div>
+                </div>
+            )}
             <div id="food-list-container">
                 {allTypeFood &&
                     allTypeFood.map(function (item) {
@@ -124,48 +176,6 @@ export default function FoodTypes(props) {
                 </div>
             )}
             {/* <button onClick={() => location.replace("/food")}>BACK</button> */}
-            {props.admin && (
-                <div id="foodUploader">
-                    <input
-                        name="name"
-                        placeholder="name"
-                        onChange={({ target }) => {
-                            setName(target.value);
-                        }}
-                    />
-                    <input
-                        defaultValue={props.type}
-                        name="type"
-                        placeholder="type"
-                        onChange={({ target }) => {
-                            setType(target.value);
-                        }}
-                    />
-                    <input
-                        name="description"
-                        placeholder="description"
-                        onChange={({ target }) => {
-                            setDescription(target.value);
-                        }}
-                    />
-                    <input
-                        name="price"
-                        placeholder="price"
-                        onChange={({ target }) => {
-                            setPrice(target.value);
-                        }}
-                    />
-                    <input
-                        onChange={({ target }) => {
-                            setFoodFile(target.files[0]);
-                        }}
-                        name="file"
-                        type="file"
-                        accept="image/*"
-                    />
-                    <button onClick={foodUpload}>UPLOAD</button>
-                </div>
-            )}
         </div>
     );
 }

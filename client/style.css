@@ -233,6 +233,7 @@ img {
     align-items: center;
     background-color: #087e8b;
     height: 500px;
+    overflow: auto;
 }
 
 #back-foodtypes-link {
@@ -340,7 +341,8 @@ img {
 #profile-editor h2,
 #cart-items-container h2,
 #full-chat h2,
-#findCustomers h2 {
+#findCustomers h2,
+#otherProfile h2 {
     font-family: "Sacramento", cursive;
     font-size: 3.5em;
     color: #45305f;
@@ -561,4 +563,52 @@ img {
 .customer h1 {
     margin: 0px 20px;
     color: #dedbd2;
+}
+
+#otherProfile-img-text {
+    display: flex;
+    /* margin: 10px; */
+}
+
+#otherProfile-img-text * {
+    margin: 10px;
+}
+
+.otherprofile-text {
+    font-size: 2em;
+}
+
+#search-term-input {
+    border-radius: 20px;
+}
+
+#foodUploader {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #45305f;
+}
+
+.food-upload-input-short {
+    width: 10%;
+}
+
+.food-upload-input-long {
+    width: 35%;
+}
+
+#food-upload-inputs,
+#food-upload-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#food-selector {
+    border: 2px solid #087e8b;
+    border-radius: 5px;
+    height: 42px;
+}
+
+#foodUploader h2 {
+    text-align: center;
 }

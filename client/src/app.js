@@ -164,7 +164,7 @@ export default class App extends Component {
                                     <Link className="navlinks" to="/basket">
                                         CART{" "}
                                         {this.state.basket_count &&
-                                            `(${this.state.basket_count})`}
+                                            `[${this.state.basket_count}]`}
                                     </Link>
                                 )}
                                 <Link className="navlinks" to="/profile">

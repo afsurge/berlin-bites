@@ -46,6 +46,7 @@ export default function FindCustomers() {
             )}
             <h3>Find specific customer</h3>
             <input
+                id="search-term-input"
                 defaultValue={searchTerm}
                 onChange={({ target }) => {
                     setSearchTerm(target.value);

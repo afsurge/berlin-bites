@@ -42,23 +42,32 @@ export default class OtherProfile extends Component {
         return (
             <>
                 <div id="otherProfile">
-                    <img
-                        id="otherProfilePic"
-                        className="largeppic"
-                        src={this.state.ppicurl}
-                    />
-                    <div id="otherProfileInfo">
-                        <h1>
-                            {this.state.first} {this.state.last}
-                        </h1>
-
-                        <p className="profile-text">📧️ {this.state.email}</p>
-                        <p className="profile-text">🏠️ {this.state.address}</p>
-                        <p className="profile-text">📱️ {this.state.phone}</p>
-                        <p className="profile-text">
-                            ✅️ Joined on {this.state.created_at.slice(0, 10)}
-                        </p>
+                    <h2>
+                        {this.state.first} {this.state.last}
+                    </h2>
+                    <div id="otherProfile-img-text">
+                        <img
+                            id="otherProfilePic"
+                            className="largeppic"
+                            src={this.state.ppicurl}
+                        />
+                        <div>
+                            <p className="otherprofile-text">
+                                📧️ {this.state.email}
+                            </p>
+                            <p className="otherprofile-text">
+                                🏠️ {this.state.address}
+                            </p>
+                            <p className="otherprofile-text">
+                                📱️ {this.state.phone}
+                            </p>
+                            <p className="otherprofile-text">
+                                ✅️ Joined on{" "}
+                                {this.state.created_at.slice(0, 10)}
+                            </p>
+                        </div>
                     </div>
+
                     <Orders
                         otherId={this.props.match.params.id}
                         admin={false}
