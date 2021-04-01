@@ -93,7 +93,7 @@ export default function Basket(props) {
     }
 
     return (
-        <div>
+        <div id="cart-items-container">
             {/* <h3>User: {props.user_id}</h3> */}
             {!foodInfo && (
                 <div>
@@ -103,17 +103,21 @@ export default function Basket(props) {
                     </h3>
                 </div>
             )}
+            {foodInfo && <h2>Your cart items</h2>}
             {foodInfo &&
                 foodInfo.map(function (food, i) {
                     return (
-                        <div key={food.id}>
+                        <div className="food-info-cart" key={food.id}>
                             <p>
-                                {food.name} -- € {food.price} --{" "}
-                                {basket[i].amount}x ---- €{" "}
+                                {food.name} | € {food.price} | Quantity:{" "}
+                                {basket[i].amount}x | Sub-total: €{" "}
                                 {food.price * basket[i].amount}
                             </p>
                             {!confirm && (
-                                <button onClick={() => removeFood(i)}>
+                                <button
+                                    className="orders-cart-buttons"
+                                    onClick={() => removeFood(i)}
+                                >
                                     REMOVE
                                 </button>
                             )}

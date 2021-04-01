@@ -80,7 +80,7 @@ export default function Orders(props) {
                                             className="orders-cart-buttons"
                                             onClick={() => getBasket(order.id)}
                                         >
-                                            BASKET
+                                            CART
                                         </button>
                                     )}
                                 </div>

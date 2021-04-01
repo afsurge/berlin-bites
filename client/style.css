@@ -310,13 +310,18 @@ img {
     height: 50px;
 }
 
-.order-info {
+.order-info,
+.food-info-cart {
     display: flex;
     align-items: center;
+    border: 2px solid #45305f;
+    margin: 5px;
 }
 
-.order-info p {
+.order-info p,
+.food-info-cart p {
     font-size: 1.5em;
+    width: 85%;
 }
 
 .orders-cart-buttons {
@@ -326,7 +331,8 @@ img {
 
 #orders h2,
 #profile h1,
-#profile-editor h2 {
+#profile-editor h2,
+#cart-items-container h2 {
     font-family: "Sacramento", cursive;
     font-size: 3.5em;
     color: #45305f;
@@ -343,6 +349,7 @@ img {
     width: 100%;
     border: 5px solid #45305f;
     border-radius: 10px;
+    margin: 20px;
 }
 
 .order-item * {
