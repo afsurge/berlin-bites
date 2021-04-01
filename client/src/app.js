@@ -57,7 +57,7 @@ export default class App extends Component {
         // console.log("Item received in App from Basket:", itemForBasket);
         // basket does not update without refresh as count done on mount
         let basketFromLS = JSON.parse(localStorage.getItem("basket"));
-        console.log("oldBasketFromLS:", basketFromLS);
+        // console.log("oldBasketFromLS:", basketFromLS);
 
         if (basketFromLS) {
             basketFromLS.push(itemForBasket);
@@ -65,6 +65,13 @@ export default class App extends Component {
         } else {
             localStorage.setItem("basket", JSON.stringify([itemForBasket]));
         }
+
+        let basketJson = localStorage.getItem("basket");
+        basketFromLS = JSON.parse(basketJson);
+        console.log(basketFromLS);
+        let count = basketFromLS.length;
+        this.setState({ basket_count: count });
+        // this.setState({ basket_items: basketFromLS });
     }
 
     toggleUploader() {
@@ -160,12 +167,19 @@ export default class App extends Component {
                                 <Link className="navlinks" to="/orders">
                                     ORDERS
                                 </Link>
-                                {!this.state.admin && (
+                                {/* {!this.state.admin && (
                                     <Link className="navlinks" to="/basket">
                                         CART{" "}
                                         {this.state.basket_count &&
                                             `[${this.state.basket_count}]`}
                                     </Link>
+                                )} */}
+                                {!this.state.admin && (
+                                    <a className="navlinks" href="/basket">
+                                        CART{" "}
+                                        {this.state.basket_count &&
+                                            `[${this.state.basket_count}]`}
+                                    </a>
                                 )}
                                 <Link className="navlinks" to="/profile">
                                     PROFILE

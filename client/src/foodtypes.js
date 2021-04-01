@@ -6,7 +6,7 @@ import FoodDetails from "./fooddetails";
 
 export default function FoodTypes(props) {
     const [foodId, setFoodId] = useState();
-    const [name, setName] = useState();
+    const [name, setName] = useState("");
     const [type, setType] = useState();
     const [description, setDescription] = useState();
     const [price, setPrice] = useState();
