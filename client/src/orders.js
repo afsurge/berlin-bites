@@ -15,25 +15,6 @@ export default function Orders(props) {
                 .then(({ data }) => {
                     console.log("Orders received from server:", data);
                     setOrders(data.reverse());
-                    // console.log(orders);
-                    // for (var i = 0; i < data.length; i++) {
-                    //     axios
-                    //         .get("/orderitems/" + data[i].id)
-                    //         .then(({ data }) => {
-                    //             console.log(
-                    //                 "Data received about this order:",
-                    //                 data
-                    //             );
-                    //             setItems({ i: data });
-                    //             // console.log(items);
-                    //             // do something more here...
-                    //         })
-                    //         .catch((err) => {
-                    //             console.log(
-                    //                 `Error getting items for order ${orders[i].id}: ${err.message}`
-                    //             );
-                    //         });
-                    // }
                 })
                 .catch((err) => {
                     console.log(
@@ -41,9 +22,6 @@ export default function Orders(props) {
                         err.message
                     );
                 });
-
-            // var sortOrders = groupBy2(orders, "id");
-            // console.log(sortOrders[5]);
         } else {
             axios
                 .get("/allorders")
@@ -78,18 +56,18 @@ export default function Orders(props) {
     }
 
     return (
-        <div>
+        <div id="orders">
             {admin ? (
                 <h2>All customer orders</h2>
             ) : (
                 <h2>{props.otherId ? "Recent" : "Your recent"} orders</h2>
             )}
             <>
-                <div>
+                <div id="orders-container">
                     {orders &&
                         orders.map(function (order) {
                             return (
-                                <div key={order.id}>
+                                <div className="order-info" key={order.id}>
                                     <p>
                                         DATE {order.created_at.slice(0, 10)} |
                                         {admin &&
@@ -99,6 +77,7 @@ export default function Orders(props) {
                                     </p>
                                     {!items && (
                                         <button
+                                            className="orders-cart-buttons"
                                             onClick={() => getBasket(order.id)}
                                         >
                                             BASKET
@@ -108,11 +87,15 @@ export default function Orders(props) {
                             );
                         })}
                 </div>
-                <div>
+                <div id="orders-items">
                     {items &&
                         items.map(function (item) {
                             return (
-                                <div key={item.id}>
+                                <div className="order-item" key={item.id}>
+                                    <img
+                                        className="food-img-small"
+                                        src={item.imgurl}
+                                    />
                                     <p>
                                         {item.name} | €{item.price} |{" "}
                                         {item.amount}x | Sub-total: €

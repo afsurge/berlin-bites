@@ -17,7 +17,11 @@ export default function FoodDetails(props) {
 
     function addToBasket(foodId, foodPrice, amount) {
         // console.log(foodId, foodPrice, amount);
-        props.basketInApp({ id: foodId, price: foodPrice, amount: amount });
+        props.basketInApp({
+            id: foodId,
+            price: foodPrice,
+            amount: amount,
+        });
     }
 
     function closeDetails() {
@@ -25,37 +29,53 @@ export default function FoodDetails(props) {
     }
 
     return (
-        <div>
+        <div id="food-details">
             {foodDetails && (
                 <>
-                    <img id="food-img" src={foodDetails.imgurl} />
-                    <h3>{foodDetails.name}</h3>
-                    <h3>{foodDetails.description}</h3>
-                    <h3>€{foodDetails.price}</h3>
-                    <button
-                        onClick={() => amount != 1 && setAmount(amount - 1)}
-                    >
-                        -
-                    </button>
-                    <input
-                        value={amount}
-                        name="amount"
-                        placeholder="amount"
-                        readOnly
+                    <img
+                        id="closeUploader"
+                        src="/x-image.png"
+                        onClick={closeDetails}
                     />
-                    <button onClick={() => setAmount(amount + 1)}>+</button>
+                    <div id="details-img-info">
+                        <img id="food-details-img" src={foodDetails.imgurl} />
+                        <div id="details-info">
+                            <h3 id="food-name">{foodDetails.name}</h3>
+                            <p>{foodDetails.description}</p>
+                            <h1>€ {foodDetails.price}</h1>
+                            <div id="details-buttons">
+                                <button
+                                    onClick={() =>
+                                        amount != 1 && setAmount(amount - 1)
+                                    }
+                                >
+                                    -
+                                </button>
+                                <input
+                                    value={amount}
+                                    name="amount"
+                                    placeholder="amount"
+                                    readOnly
+                                />
+                                <button onClick={() => setAmount(amount + 1)}>
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <button
-                        onClick={() =>
+                        id="add-cart-button"
+                        onClick={() => {
                             addToBasket(
                                 foodDetails.id,
                                 foodDetails.price,
                                 amount
-                            )
-                        }
+                            );
+                            closeDetails();
+                        }}
                     >
-                        ADD TO BASKET (€ {foodDetails.price * amount})
+                        ADD TO CART (€ {foodDetails.price * amount})
                     </button>
-                    <button onClick={closeDetails}>CLOSE</button>
                 </>
             )}
         </div>

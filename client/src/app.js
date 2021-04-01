@@ -41,6 +41,7 @@ export default class App extends Component {
                 "Error getting user info:", err.message;
             });
 
+        // below setState need refresh to update cart!
         let newBasketFromLS = localStorage.getItem("basket"); // JSON
         let count;
         if (newBasketFromLS) {
@@ -54,7 +55,7 @@ export default class App extends Component {
 
     basketInApp(itemForBasket) {
         // console.log("Item received in App from Basket:", itemForBasket);
-
+        // basket does not update without refresh as count done on mount
         let basketFromLS = JSON.parse(localStorage.getItem("basket"));
         console.log("oldBasketFromLS:", basketFromLS);
 
@@ -94,7 +95,7 @@ export default class App extends Component {
         }
         return (
             <div id="mainAppContainer">
-                <div className="appTop">
+                {/* <div className="appTop">
                     <a id="logo-tag" href="/">
                         <img id="logo" src="/food-to-go-1.png" />
                     </a>
@@ -140,10 +141,56 @@ export default class App extends Component {
                         />
                         <h1 id="greetuser">Hi {this.state.first} !</h1>
                     </div>
-                </div>
+                </div> */}
 
                 <BrowserRouter>
                     <>
+                        <div className="appTop">
+                            <Link id="logo-tag" to="/">
+                                <img id="logo" src="/food-to-go-1.png" />
+                            </Link>
+                            <div id="brand">
+                                <h1 className="brand-name">Berlin</h1>
+                                <h1 className="brand-name">Bites</h1>
+                            </div>
+                            <div id="navbar">
+                                <Link className="navlinks" to="/food">
+                                    FOOD
+                                </Link>
+                                <Link className="navlinks" to="/orders">
+                                    ORDERS
+                                </Link>
+                                {!this.state.admin && (
+                                    <Link className="navlinks" to="/basket">
+                                        CART{" "}
+                                        {this.state.basket_count &&
+                                            `(${this.state.basket_count})`}
+                                    </Link>
+                                )}
+                                <Link className="navlinks" to="/profile">
+                                    PROFILE
+                                </Link>
+                                <Link className="navlinks" to="/messages">
+                                    MESSAGES
+                                </Link>
+                                {this.state.admin && (
+                                    <Link className="navlinks" to="/customers">
+                                        CUSTOMERS
+                                    </Link>
+                                )}
+                                <Link className="navlinks" to="/logout">
+                                    LOGOUT
+                                </Link>
+                            </div>
+                            <div id="greet-profile">
+                                <ProfilePic
+                                    ppicurl={this.state.ppicurl}
+                                    toggleUploader={this.toggleUploader}
+                                    class2="smallppic"
+                                />
+                                <h1 id="greetuser">Hi {this.state.first} !</h1>
+                            </div>
+                        </div>
                         <Route
                             path="/food"
                             render={() => (

@@ -33,40 +33,71 @@ export default function Food(props) {
                     {showTypes && (
                         <div id="food-types">
                             <Link
+                                className="food-types-links"
                                 to="/food/starters"
                                 onClick={() => {
                                     setShowTypes(false);
                                 }}
                             >
-                                STARTERS
+                                <img
+                                    className="food-types-img"
+                                    src="/food/starters.jpg"
+                                />
+                                <p className="food-types-p">Starters</p>
                             </Link>
                             <Link
+                                className="food-types-links"
                                 to="/food/main"
                                 onClick={() => {
                                     setShowTypes(false);
                                 }}
                             >
-                                MAIN DISHES
+                                <img
+                                    className="food-types-img"
+                                    src="/food/mains.jpg"
+                                />
+                                <p className="food-types-p">Main Dishes</p>
                             </Link>
                             <Link
+                                className="food-types-links"
                                 to="/food/sides"
                                 onClick={() => {
                                     setShowTypes(false);
                                 }}
                             >
-                                SIDE DISHES
+                                <img
+                                    className="food-types-img"
+                                    src="/food/sides.jpg"
+                                />
+                                <p className="food-types-p">Side Dishes</p>
                             </Link>
                             <Link
+                                className="food-types-links"
                                 to="/food/dessert"
                                 onClick={() => {
                                     setShowTypes(false);
                                 }}
                             >
-                                DESSERTS
+                                <img
+                                    className="food-types-img"
+                                    src="/food/dessert.jpg"
+                                />
+                                <p className="food-types-p">Dessert</p>
                             </Link>
                         </div>
                     )}
-
+                    {!showTypes && (
+                        <div id="back-foodtypes-link">
+                            <Link
+                                to="/food"
+                                onClick={() => {
+                                    setShowTypes(true);
+                                }}
+                            >
+                                BACK
+                            </Link>
+                        </div>
+                    )}
                     <Route
                         path="/food/starters"
                         render={() => (
@@ -107,16 +138,6 @@ export default function Food(props) {
                             />
                         )}
                     />
-                    {!showTypes && (
-                        <Link
-                            to="/food"
-                            onClick={() => {
-                                setShowTypes(true);
-                            }}
-                        >
-                            BACK
-                        </Link>
-                    )}
                 </>
             </BrowserRouter>
         </div>

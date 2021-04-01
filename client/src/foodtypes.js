@@ -82,31 +82,46 @@ export default function FoodTypes(props) {
 
     return (
         <div>
-            {props.type == "starter" && <h1>STARTERS</h1>}
-            {props.type == "main" && <h1>MAIN DISHES</h1>}
-            {props.type == "side" && <h1>SIDE DISHES</h1>}
-            {props.type == "dessert" && <h1>DESSERTS</h1>}
-            <div>
+            {props.type == "starter" && (
+                <h1 className="food-type-h1">Starters</h1>
+            )}
+            {props.type == "main" && (
+                <h1 className="food-type-h1">Main Dishes</h1>
+            )}
+            {props.type == "side" && (
+                <h1 className="food-type-h1">Side Dishes</h1>
+            )}
+            {props.type == "dessert" && (
+                <h1 className="food-type-h1">Dessert</h1>
+            )}
+            <div id="food-list-container">
                 {allTypeFood &&
                     allTypeFood.map(function (item) {
                         return (
-                            <h2
-                                key={item.id}
+                            <div
                                 onClick={() => showFoodDetails(item.id)}
+                                className="food-list"
+                                key={item.id}
                             >
-                                {item.name}
-                            </h2>
+                                <img
+                                    className="food-img-small"
+                                    src={item.imgurl}
+                                />
+                                <h2>{item.name}</h2>
+                            </div>
                         );
                     })}
             </div>
             {foodId && (
-                <FoodDetails
-                    foodId={foodId}
-                    admin={props.admin}
-                    basketInApp={props.basketInApp}
-                    showFoodDetails={(id) => showFoodDetails(id)}
-                    // path={location.pathname}
-                />
+                <div id="food-details-container">
+                    <FoodDetails
+                        foodId={foodId}
+                        admin={props.admin}
+                        basketInApp={props.basketInApp}
+                        showFoodDetails={(id) => showFoodDetails(id)}
+                        // path={location.pathname}
+                    />
+                </div>
             )}
             {/* <button onClick={() => location.replace("/food")}>BACK</button> */}
             {props.admin && (

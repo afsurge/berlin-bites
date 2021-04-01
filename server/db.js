@@ -107,7 +107,7 @@ module.exports.getppicUrl = (userId) => {
 
 module.exports.getItemsByOrderId = (orderId) => {
     const q = `
-        SELECT orderitems.id, orderitems.order_id, orderitems.amount, food.id, food.name, food.price
+        SELECT orderitems.id, orderitems.order_id, orderitems.amount, food.id, food.imgurl, food.name, food.price
         FROM orderitems
         JOIN food
         ON orderitems.food_id = food.id
