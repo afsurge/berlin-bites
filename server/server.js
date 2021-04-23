@@ -458,9 +458,15 @@ app.get("*", function (req, res) {
 
 //// routes ////
 
+//// listen ////
+
 server.listen(process.env.PORT || 3001, function () {
     console.log(".: 🍽️  Delicacies are about to be served 🍱️ :.");
 });
+
+//// listen ////
+
+//// socket.io ////
 
 io.on("connection", (socket) => {
     const userId = socket.request.session.userId;
@@ -529,3 +535,5 @@ io.on("connection", (socket) => {
         });
     });
 });
+
+//// socket.io ////
