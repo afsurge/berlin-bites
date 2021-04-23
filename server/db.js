@@ -1,5 +1,4 @@
 const spicedPg = require("spiced-pg");
-const { ids } = require("webpack");
 
 const db = spicedPg(
     process.env.DATABASE_URL ||
