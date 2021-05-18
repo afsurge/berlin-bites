@@ -1,4 +1,5 @@
 node_modules
+notes
 .DS_Store
 secrets.json
 client/public/bundle.js
