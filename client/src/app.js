@@ -102,54 +102,6 @@ export default class App extends Component {
         }
         return (
             <div id="mainAppContainer">
-                {/* <div className="appTop">
-                    <a id="logo-tag" href="/">
-                        <img id="logo" src="/food-to-go-1.png" />
-                    </a>
-                    <div id="brand">
-                        <h1 className="brand-name">Berlin</h1>
-                        <h1 className="brand-name">Bites</h1>
-                    </div>
-                    <div id="navbar">
-                        <a className="navlinks" href="/food">
-                            FOOD
-                        </a>
-                        <a className="navlinks" href="/orders">
-                            ORDERS
-                        </a>
-                        {!this.state.admin && (
-                            <a className="navlinks" href="/basket">
-                                BASKET
-                                {this.state.basket_count &&
-                                    `(${this.state.basket_count})`}
-                            </a>
-                        )}
-
-                        <a className="navlinks" href="/profile">
-                            PROFILE
-                        </a>
-                        <a className="navlinks" href="/messages">
-                            MESSAGES
-                        </a>
-                        {this.state.admin && (
-                            <a className="navlinks" href="/customers">
-                                CUSTOMERS
-                            </a>
-                        )}
-                        <a className="navlinks" href="/logout">
-                            LOGOUT
-                        </a>
-                    </div>
-                    <div id="greet-profile">
-                        <ProfilePic
-                            ppicurl={this.state.ppicurl}
-                            toggleUploader={this.toggleUploader}
-                            class2="smallppic"
-                        />
-                        <h1 id="greetuser">Hi {this.state.first} !</h1>
-                    </div>
-                </div> */}
-
                 <BrowserRouter>
                     <>
                         <div className="appTop">
